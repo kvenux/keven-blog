@@ -23,6 +23,7 @@
 
 html {
   font-size: 16px;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -413,6 +414,50 @@ h1 {
   font-size: 0.93rem;
 }
 
+.post-floating-actions {
+  position: fixed;
+  z-index: 20;
+  right: 18px;
+  bottom: 28px;
+  display: grid;
+  gap: 10px;
+}
+
+.post-floating-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 92px;
+  min-height: 42px;
+  padding: 8px 13px;
+  border: 1px solid rgba(14, 165, 233, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.88);
+  color: #0f172a;
+  font-size: 0.92rem;
+  font-weight: 750;
+  line-height: 1;
+  text-decoration: none;
+  box-shadow: 0 16px 44px rgba(15, 23, 42, 0.14);
+  backdrop-filter: blur(14px);
+}
+
+.post-floating-action:hover {
+  border-color: rgba(14, 165, 233, 0.5);
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.post-floating-action span:first-child {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  font-size: 1.08rem;
+  font-weight: 800;
+}
+
 .site-footer {
   display: flex;
   justify-content: space-between;
@@ -655,5 +700,18 @@ h1 {
     bottom: 12px;
     width: auto;
     padding: 16px;
+  }
+
+  .post-floating-actions {
+    right: 12px;
+    bottom: 14px;
+    gap: 8px;
+  }
+
+  .post-floating-action {
+    min-width: 76px;
+    min-height: 38px;
+    padding: 7px 10px;
+    font-size: 0.84rem;
   }
 }

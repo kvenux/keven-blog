@@ -14,4 +14,17 @@
       {{ .Content }}
     </div>
   </article>
+
+  {{ if eq .Section "posts" }}
+    <nav class="post-floating-actions" aria-label="文章快捷操作">
+      <a class="post-floating-action" href="{{ "/" | relURL }}" aria-label="返回首页" title="返回首页">
+        <span aria-hidden="true">⌂</span>
+        <span>首页</span>
+      </a>
+      <a class="post-floating-action" href="#top" aria-label="回到开头" title="回到开头">
+        <span aria-hidden="true">↑</span>
+        <span>开头</span>
+      </a>
+    </nav>
+  {{ end }}
 {{ end }}

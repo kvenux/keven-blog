@@ -1,12 +1,6 @@
----
-title: "如何管理一群聪明但缺乏判断力的实习生？"
-date: 2026-05-15T00:30:00+08:00
-description: "Superpowers 把 coding agent 当作聪明但缺判断力的实习生来管理。"
-draft: false
-slug: "superpowers-management"
----
+# 如何管理一群聪明但缺乏判断力的实习生？
 
-![管理 AI 实习生](images/01-cover-managing-ai-interns.png)
+![管理 AI 实习生](assets/superpowers-management/01-cover-managing-ai-interns.png)
 
 > AI编程缺的不是代码能力，是工程管理能力
 
@@ -22,7 +16,7 @@ slug: "superpowers-management"
 
 ## 它的人物设定:一个有天赋但靠不住的工程师
 
-![有天赋但靠不住的 Agent](images/02-agent-persona-talented-but-unreliable.png)
+![有天赋但靠不住的 Agent](assets/superpowers-management/02-agent-persona-talented-but-unreliable.png)
 
 先看Superpowers怎么**设定**它要管理的对象。
 
@@ -56,7 +50,7 @@ README里那句更狠，说计划要写到**一个有热情但taste差、没判�
 
 ## 弱点一:它会给自己找借口
 
-![弱点一：合理化捷径](images/03-weakness-rationalization-shortcuts.png)
+![弱点一：合理化捷径](assets/superpowers-management/03-weakness-rationalization-shortcuts.png)
 
 模型不会撒谎，但它会推理，而推理是会找捷径的。给它一组互相冲突的目标——**你要尽快完成**和**它要被充分测试**——它很可能推出一条让任务**达成**但偷掉麻烦的路。一个被反复提到的失败模式是agent删测试:既然失败的测试等于项目失败，那没有测试就不会失败。这不是模型坏，是它在目标导向地找路。
 
@@ -95,7 +89,7 @@ NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST
 
 ## 弱点二:它会乐观地汇报**我做完了**
 
-![弱点二：实现者不能当裁判](images/04-weakness-implementer-cannot-judge.png)
+![弱点二：实现者不能当裁判](assets/superpowers-management/04-weakness-implementer-cannot-judge.png)
 
 第二个弱点是，实现者对自己的产出过度乐观。它会说**完成了**，但它说的完成，是**我觉得完成了**。
 
@@ -136,7 +130,7 @@ DO:
 
 ## 弱点三:它的上下文会被污染，而且会分心
 
-![弱点三：上下文污染与 Fresh Subagent](images/05-weakness-context-pollution-fresh-subagent.png)
+![弱点三：上下文污染与 Fresh Subagent](assets/superpowers-management/05-weakness-context-pollution-fresh-subagent.png)
 
 第三个弱点跟记忆有关。一个session聊得越久，上下文里塞的东西越杂，模型越容易被早先的内容带偏，或者被无关的文件读取淹没。
 
@@ -155,7 +149,7 @@ reviewer也是同理，而且更关键。如果reviewer复用了被污染的sess
 
 ## 弱点四:它不知道自己的能力边界，会硬撑
 
-![弱点四：允许喊停](images/06-weakness-stop-and-escalate.png)
+![弱点四：允许喊停](assets/superpowers-management/06-weakness-stop-and-escalate.png)
 
 最后一个弱点最容易被忽略:实习生不会喊停。它接到一个超出自己能力的任务，默认反应是硬着头皮交一个东西出来，而不是说**我不行**。
 
@@ -186,7 +180,7 @@ STOP and escalate when:
 
 ## 四道防护栏，串成一条流水线
 
-![Superpowers 管理流水线](images/07-superpowers-management-pipeline.png)
+![Superpowers 管理流水线](assets/superpowers-management/07-superpowers-management-pipeline.png)
 
 把这四个弱点和四道防护栏摆在一起，Superpowers的整体结构就出来了。它的主线是brainstorming → planning → execution → review四个环节，而这条线从一开始就是拦着你的。
 
@@ -227,7 +221,7 @@ AI说**完成了**其实没完成——对应弱点二，独立reviewer和那条
 
 ## 程序员的新工作:把思考前置
 
-![把思考前置](images/08-thinking-before-coding.png)
+![把思考前置](assets/superpowers-management/08-thinking-before-coding.png)
 
 收拢成一句话:AI编程没有让程序员少思考，它让思考换了个位置——从**边写边想**挪到了**动手之前想清楚**。
 
@@ -238,6 +232,7 @@ AI说**完成了**其实没完成——对应弱点二，独立reviewer和那条
 把这一篇和上一篇放一起看，是一件事的两面。上一篇说，你得摸清你用的模型在哪撒谎，然后在工具层补偿;这一篇说，你得把agent当成缺判断力的实习生，然后用管理流程补偿。一个偏**引擎的具体故障码**，一个偏**协作者的通用弱点**，但底层动作完全一样:先承认它有弱点，再围着弱点设计。差别在于，CC的补偿要靠你自己建那条观测—量化—校准的闭环，而Superpowers把**承认弱点、围着弱点设计**做成了一个现成方案——不用拥有模型，不用自己从零攒借口清单，装上就能用。代价是它给的是通用补偿，不是为你那台引擎校准过的。
 
 Superpowers没有发明什么新东西。它只是把**管理一群聪明但缺判断力的人**这件已经被研究了几十年的事，搬到了coding agent上，并且把每一个管理动作都写成了不讲道理的提示词。值得想的不是这套工具本身，而是它背后那个不太舒服的结论:你写代码的能力，正在变得没那么重要;你定义工作、验收工作的能力，正在变成那个真正决定结果的变量。
+
 
 
 
