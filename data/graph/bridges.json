@@ -1,0 +1,58 @@
+[
+  {
+    "source": "article:claude-code-eggs",
+    "target": "article:claude-code-false-claims",
+    "type": "precedes",
+    "reason": "源码彩蛋文章提供 Claude Code 内部机制材料，False Claim 文章进一步抽象为工程化防御机制。",
+    "weight": 8
+  },
+  {
+    "source": "article:claude-code-false-claims",
+    "target": "article:superpowers-management",
+    "type": "extends",
+    "reason": "前者讨论 Claude Code 在 harness 内补偿模型弱点，后者讨论 Superpowers 在 harness 外用管理流程补偿 agent 弱点。",
+    "weight": 9
+  },
+  {
+    "source": "claim:false-claim-is-core-risk",
+    "target": "claim:agent-needs-management-not-trust",
+    "type": "supports",
+    "reason": "Agent 会误报完成，因此它不能被默认信任，必须进入管理和验收流程。",
+    "weight": 9
+  },
+  {
+    "source": "concept:independent-verification",
+    "target": "concept:verification-before-completion",
+    "type": "related_to",
+    "reason": "两者都强调完成声明必须基于实际验证证据。",
+    "weight": 8
+  },
+  {
+    "source": "concept:subagent-verifier",
+    "target": "concept:independent-reviewer",
+    "type": "related_to",
+    "reason": "Claude Code 的 verifier agent 和 Superpowers 的独立 reviewer 都把实现者和裁判拆开。",
+    "weight": 8
+  },
+  {
+    "source": "concept:permission-system",
+    "target": "concept:human-gatekeeper",
+    "type": "supports",
+    "reason": "权限系统和人类守门人共同解决 agent 行动边界问题。",
+    "weight": 7
+  },
+  {
+    "source": "concept:agentic-coding",
+    "target": "concept:coding-agent",
+    "type": "related_to",
+    "reason": "Agentic Coding 是范式，coding agent 是这个范式里的执行主体。",
+    "weight": 7
+  },
+  {
+    "source": "topic:claude-code",
+    "target": "topic:coding-agent-management",
+    "type": "contrasts_with",
+    "reason": "Claude Code 代表产品内建的补偿机制，coding agent management 代表用户侧流程治理。",
+    "weight": 7
+  }
+]

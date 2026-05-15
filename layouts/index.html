@@ -1,0 +1,31 @@
+{{ define "main" }}
+  <section class="intro">
+    <p class="eyebrow">个人博客</p>
+    <h1>AI Native 时代的长期主义</h1>
+    <div class="topic-strip" aria-label="写作方向">
+      <span>Agent 缺陷</span>
+      <span>Agentic SE</span>
+      <span>元认知</span>
+      <span>Just For Fun</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>最新文章</h2>
+      <a href="{{ "/posts/" | relURL }}">全部文章</a>
+    </div>
+
+    <div class="post-list">
+      {{ range first 6 (where site.RegularPages "Section" "posts") }}
+        <article class="post-item">
+          <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "2006-01-02" }}</time>
+          <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          {{ with .Description }}
+            <p>{{ . }}</p>
+          {{ end }}
+        </article>
+      {{ end }}
+    </div>
+  </section>
+{{ end }}

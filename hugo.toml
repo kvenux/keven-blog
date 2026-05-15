@@ -1,0 +1,22 @@
+baseURL = "https://example.com/"
+locale = "zh-CN"
+title = "Keven Blog"
+enableRobotsTXT = true
+hasCJKLanguage = true
+
+[params]
+  description = "个人技术博客"
+  author = "Keven"
+
+[permalinks]
+  posts = "/posts/:slug/"
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[outputs]
+  home = ["HTML", "RSS"]

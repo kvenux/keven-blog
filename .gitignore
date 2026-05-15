@@ -1,0 +1,24 @@
+public/
+resources/_gen/
+.hugo_build.lock
+.playwright-mcp/
+
+# Local dependencies and caches
+node_modules/
+.cache/
+.parcel-cache/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Temporary working files
+tmp/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo

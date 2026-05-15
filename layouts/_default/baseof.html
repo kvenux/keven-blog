@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ if not .IsHome }}{{ .Title }} · {{ end }}{{ site.Title }}</title>
+    <meta name="description" content="{{ .Description | default site.Params.description }}">
+    <link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
+    <link rel="stylesheet" href="{{ "css/main.css" | relURL }}?v={{ now.Unix }}">
+    {{ with .OutputFormats.Get "RSS" }}
+      <link rel="alternate" type="application/rss+xml" title="{{ site.Title }}" href="{{ .RelPermalink }}">
+    {{ end }}
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="{{ "/" | relURL }}">{{ site.Title }}</a>
+      <nav aria-label="主导航">
+        <a href="{{ "/" | relURL }}">首页</a>
+        <a href="{{ "/posts/" | relURL }}">归档</a>
+        <a href="{{ "/graph/" | relURL }}">图谱</a>
+        <a href="{{ "/about/" | relURL }}">关于</a>
+      </nav>
+    </header>
+
+    <main class="site-main">
+      {{ block "main" . }}{{ end }}
+    </main>
+
+    <footer class="site-footer">
+      <span>© {{ now.Format "2006" }} {{ site.Params.author }}</span>
+      <a href="{{ "/index.xml" | relURL }}">RSS</a>
+    </footer>
+  </body>
+</html>

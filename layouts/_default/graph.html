@@ -1,0 +1,46 @@
+{{ define "main" }}
+  <section class="graph-shell" data-graph-root data-site-root="{{ "/" | relURL }}" data-graph-src="{{ "graph/knowledge-graph.json" | relURL }}">
+    <div class="graph-topbar">
+      <div>
+        <p class="eyebrow">AI Native Blog</p>
+        <h1>知识图谱</h1>
+        <p>文章只是入口，判断、概念和主题才是这个博客真正的知识网络。</p>
+      </div>
+      <div class="graph-stats" aria-label="图谱统计">
+        <span><strong data-stat="articles">0</strong> articles</span>
+        <span><strong data-stat="nodes">0</strong> nodes</span>
+        <span><strong data-stat="links">0</strong> links</span>
+      </div>
+    </div>
+
+    <div class="graph-stage">
+      <div class="graph-toolbar" aria-label="图谱筛选">
+        <button type="button" data-filter="all" class="is-active">All</button>
+        <button type="button" data-filter="article">Articles</button>
+        <button type="button" data-filter="claim">Claims</button>
+        <button type="button" data-filter="concept">Concepts</button>
+        <button type="button" data-filter="topic">Topics</button>
+      </div>
+
+      <canvas class="graph-canvas" data-graph-canvas aria-label="交互式知识图谱"></canvas>
+
+      <aside class="graph-panel" data-graph-panel>
+        <p class="panel-kicker">Selected Node</p>
+        <h2 data-node-title>选择一个节点</h2>
+        <p data-node-type>点击文章、判断、概念或主题节点查看它在知识网络中的位置。</p>
+        <p data-node-summary></p>
+        <a data-node-link href="#" hidden>打开文章</a>
+      </aside>
+    </div>
+
+    <div class="graph-legend" aria-label="节点类型说明">
+      <span><i style="--dot:#f25f4c"></i>Article</span>
+      <span><i style="--dot:#00a6fb"></i>Claim</span>
+      <span><i style="--dot:#7f5af0"></i>Concept</span>
+      <span><i style="--dot:#2cb67d"></i>Topic</span>
+      <span><i style="--dot:#faae2b"></i>Keyword</span>
+    </div>
+  </section>
+
+  <script src="{{ "js/graph.js" | relURL }}" defer></script>
+{{ end }}

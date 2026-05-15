@@ -1,0 +1,3109 @@
+{
+  "generatedAt": "2026-05-15T00:30:38.837Z",
+  "stats": {
+    "articles": 3,
+    "nodes": 112,
+    "links": 236
+  },
+  "nodes": [
+    {
+      "level": 4,
+      "color": "#f25f4c",
+      "weight": 10,
+      "id": "article:claude-code-eggs",
+      "type": "article",
+      "label": "Claude Code 彩蛋与内部机制观察",
+      "title": "Claude Code 彩蛋与内部机制观察",
+      "summary": "文章通过反编译和源码线索梳理 Claude Code 中隐藏的内部功能、实验开关、提示词机制、记忆整理、协作人格、远程权限、学习模式和趣味彩蛋，认为这些细节显示 Claude Code 不是一个单纯 CLI 工具，而是 Anthropic 围绕 AI 工程协作、产品实验和模型行为控制构建的复杂系统。",
+      "stance": "好奇、分析性且略带调侃；整体肯定 Claude Code 的产品复杂度，同时强调其内部机制暴露出 Anthropic 对 AI 协作形态、风控、身份隐藏和产品实验的真实取舍。",
+      "url": "posts/claude-code-eggs/",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#2cb67d",
+      "weight": 10,
+      "id": "topic:claude-code-internals",
+      "type": "topic",
+      "label": "Claude Code 内部机制",
+      "summary": "专题入口",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#2cb67d",
+      "weight": 9,
+      "id": "topic:ai-agent-product-design",
+      "type": "topic",
+      "label": "AI Agent 产品设计",
+      "summary": "专题入口",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#2cb67d",
+      "weight": 8,
+      "id": "topic:anthropic-experiments",
+      "type": "topic",
+      "label": "Anthropic 内部实验",
+      "summary": "专题入口",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#2cb67d",
+      "weight": 7,
+      "id": "topic:developer-experience",
+      "type": "topic",
+      "label": "开发者体验与 CLI 文化",
+      "summary": "专题入口",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#2cb67d",
+      "weight": 8,
+      "id": "topic:model-safety-and-control",
+      "type": "topic",
+      "label": "模型安全与行为控制",
+      "summary": "专题入口",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 10,
+      "id": "concept:ant-only-code-paths",
+      "type": "concept",
+      "label": "ant-only 内部代码路径",
+      "role": "central",
+      "summary": "通过 USER_TYPE 等条件分支暴露给 Anthropic 内部用户的功能集合，包括隐藏命令、内部成本显示、实验工具和提示词。",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 9,
+      "id": "concept:undercover-mode",
+      "type": "concept",
+      "label": "Undercover Mode",
+      "role": "central",
+      "summary": "Claude Code 在公开仓库中隐藏 AI 身份和 Claude Code 归因的机制，避免提交信息、PR 描述或署名暴露 AI 参与。",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 8,
+      "id": "concept:auto-dream-memory",
+      "type": "concept",
+      "label": "AutoDream 记忆整理",
+      "role": "central",
+      "summary": "后台触发的记忆巩固机制，通过 forked subagent 汇总、剪枝和索引近期会话信号。",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 7,
+      "id": "concept:buddy-system",
+      "type": "concept",
+      "label": "Buddy 虚拟伙伴系统",
+      "role": "supporting",
+      "summary": "Claude Code 内置的宠物式伙伴系统，包含物种、稀有度、性格、配饰和用户哈希分配。",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 9,
+      "id": "concept:model-codename-leaks",
+      "type": "concept",
+      "label": "模型代号泄露线索",
+      "role": "central",
+      "summary": "source map、excluded-strings、feature flag 和注释中出现的 Capybara、Tengu、Fennec、Numbat 等模型或产品代号。",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 7,
+      "id": "concept:token-limit-recovery",
+      "type": "concept",
+      "label": "Token 上限恢复机制",
+      "role": "supporting",
+      "summary": "当输出 token 达到限制时，Claude Code 通过 meta message 指示模型直接恢复，不向用户展示中断恢复提示。",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 8,
+      "id": "concept:proactive-autonomy",
+      "type": "concept",
+      "label": "Proactive 自主行动模式",
+      "role": "central",
+      "summary": "Claude Code 根据终端焦点、tick 消息和 SleepTool 等信号判断用户是否离开，并调整自主行动程度。",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 7,
+      "id": "concept:anti-distillation",
+      "type": "concept",
+      "label": "Anti-distillation 机制",
+      "role": "supporting",
+      "summary": "Claude Code 对一方 CLI 启用 fake_tools 等反蒸馏字段，用于降低外部蒸馏或行为复刻风险。",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 7,
+      "id": "concept:remote-permission-channels",
+      "type": "concept",
+      "label": "远程权限通道",
+      "role": "supporting",
+      "summary": "通过 Telegram、iMessage、Discord 等渠道接收权限确认，并与本地 UI、hooks、classifier 等解析器竞态。",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 7,
+      "id": "concept:learning-mode",
+      "type": "concept",
+      "label": "Learning 模式",
+      "role": "supporting",
+      "summary": "Claude Code 通过 TODO(human)、提示单元和避免过度赞美等规则，把任务拆成适合人类学习的交互流程。",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 6,
+      "id": "concept:file-history-rewind",
+      "type": "concept",
+      "label": "File History 与 Rewind",
+      "role": "supporting",
+      "summary": "Claude Code 在本地记录文件历史快照，用于在无 git stash 的情况下撤回或恢复修改。",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 6,
+      "id": "concept:prompt-cache-stability",
+      "type": "concept",
+      "label": "Prompt Cache 稳定性",
+      "role": "supporting",
+      "summary": "通过缓存会话开始日期等方式减少 prompt cache 失效，即使牺牲午夜后日期准确性。",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#00a6fb",
+      "weight": 10,
+      "id": "claim:claude-code-is-complex-agent-system",
+      "type": "claim",
+      "label": "Claude Code 的源码线索表明，它已经不是单纯的命令行助手，而是包含身份、记忆、自主行动、权限、学习和实验开关的复杂 AI agent 系统。",
+      "summary": "Claude Code 的源码线索表明，它已经不是单纯的命令行助手，而是包含身份、记忆、自主行动、权限、学习和实验开关的复杂 AI agent 系统。",
+      "importance": "core",
+      "confidence": "high",
+      "status": "active",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#00a6fb",
+      "weight": 10,
+      "id": "claim:internal-branches-reveal-anthropic-priorities",
+      "type": "claim",
+      "label": "ant-only 分支、隐藏命令和 feature flag 暴露了 Anthropic 对内部实验、成本观测、模型发布和产品试验的优先级。",
+      "summary": "ant-only 分支、隐藏命令和 feature flag 暴露了 Anthropic 对内部实验、成本观测、模型发布和产品试验的优先级。",
+      "importance": "core",
+      "confidence": "medium",
+      "status": "active",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#00a6fb",
+      "weight": 10,
+      "id": "claim:undercover-mode-shows-ai-attribution-tension",
+      "type": "claim",
+      "label": "Undercover Mode 说明 Anthropic 一方面希望 Claude Code 深度参与公开代码协作，另一方面又需要控制 AI 署名和模型代号泄露带来的社会与安全风险。",
+      "summary": "Undercover Mode 说明 Anthropic 一方面希望 Claude Code 深度参与公开代码协作，另一方面又需要控制 AI 署名和模型代号泄露带来的社会与安全风险。",
+      "importance": "core",
+      "confidence": "high",
+      "status": "active",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#00a6fb",
+      "weight": 7,
+      "id": "claim:memory-and-recovery-make-claude-feel-continuous",
+      "type": "claim",
+      "label": "AutoDream、token limit recovery 和文件历史机制共同增强了 Claude Code 的连续性，让它在长任务、上下文压缩和修改回滚中更像持续工作的协作者。",
+      "summary": "AutoDream、token limit recovery 和文件历史机制共同增强了 Claude Code 的连续性，让它在长任务、上下文压缩和修改回滚中更像持续工作的协作者。",
+      "importance": "supporting",
+      "confidence": "high",
+      "status": "active",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#00a6fb",
+      "weight": 7,
+      "id": "claim:playful-details-are-product-strategy",
+      "type": "claim",
+      "label": "Buddy、plan ID、spinner、stickers 和 thinkback 等彩蛋并非纯装饰，它们把开发工具包装成更有人格、更有社区感的产品体验。",
+      "summary": "Buddy、plan ID、spinner、stickers 和 thinkback 等彩蛋并非纯装饰，它们把开发工具包装成更有人格、更有社区感的产品体验。",
+      "importance": "supporting",
+      "confidence": "medium",
+      "status": "active",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#00a6fb",
+      "weight": 10,
+      "id": "claim:proactive-and-remote-permission-expand-agent-boundary",
+      "type": "claim",
+      "label": "Proactive 模式和远程权限通道把 Claude Code 从本地被动执行器推进到可跨时间、跨设备协作的半自主工程代理。",
+      "summary": "Proactive 模式和远程权限通道把 Claude Code 从本地被动执行器推进到可跨时间、跨设备协作的半自主工程代理。",
+      "importance": "core",
+      "confidence": "medium",
+      "status": "active",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:claude-code",
+      "type": "keyword",
+      "label": "Claude Code",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-eggs",
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:anthropic",
+      "type": "keyword",
+      "label": "Anthropic",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-eggs",
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:source-map",
+      "type": "keyword",
+      "label": "source map",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:ant-only",
+      "type": "keyword",
+      "label": "ant-only",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:undercover-mode",
+      "type": "keyword",
+      "label": "undercover mode",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:autodream",
+      "type": "keyword",
+      "label": "AutoDream",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:feature-flag",
+      "type": "keyword",
+      "label": "feature flag",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:model-codename",
+      "type": "keyword",
+      "label": "model codename",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:capybara",
+      "type": "keyword",
+      "label": "Capybara",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:tengu",
+      "type": "keyword",
+      "label": "Tengu",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:anti-distillation",
+      "type": "keyword",
+      "label": "anti-distillation",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:proactive-agent",
+      "type": "keyword",
+      "label": "proactive agent",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:remote-permission",
+      "type": "keyword",
+      "label": "remote permission",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:learning-mode",
+      "type": "keyword",
+      "label": "learning mode",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:file-history",
+      "type": "keyword",
+      "label": "file history",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:rewind",
+      "type": "keyword",
+      "label": "rewind",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-eggs"
+      ]
+    },
+    {
+      "level": 4,
+      "color": "#f25f4c",
+      "weight": 10,
+      "id": "article:claude-code-false-claims",
+      "type": "article",
+      "label": "从 Agent 的假阳性问题看 Claude Code 的工程化",
+      "title": "从 Agent 的假阳性问题看 Claude Code 的工程化",
+      "summary": "文章认为，Agentic Coding 的核心问题不是模型能力本身，而是模型在复杂任务中容易产生 False Claim：把未验证、未完成或失败的工作说成成功。Claude Code 的价值在于围绕这种缺陷建立产品、提示词、权限、验证和协作机制，让 Agent 从“听话执行器”变成需要被约束、审查和验证的工程协作者。",
+      "stance": "Claude Code 的领先不只是 Claude 模型能力，而是 Anthropic 对 Agent 失败模式的系统化产品工程。",
+      "url": "posts/claude-code-false-claims/",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#2cb67d",
+      "weight": 9,
+      "id": "topic:agentic-coding",
+      "type": "topic",
+      "label": "Agentic Coding",
+      "summary": "专题入口",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#2cb67d",
+      "weight": 10,
+      "id": "topic:false-claims",
+      "type": "topic",
+      "label": "False Claim",
+      "summary": "专题入口",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#2cb67d",
+      "weight": 10,
+      "id": "topic:claude-code",
+      "type": "topic",
+      "label": "Claude Code",
+      "summary": "专题入口",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#2cb67d",
+      "weight": 9,
+      "id": "topic:verification-discipline",
+      "type": "topic",
+      "label": "验证机制",
+      "summary": "专题入口",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#2cb67d",
+      "weight": 8,
+      "id": "topic:product-engineering",
+      "type": "topic",
+      "label": "产品工程化",
+      "summary": "专题入口",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 10,
+      "id": "concept:false-claim",
+      "type": "concept",
+      "label": "False Claim",
+      "role": "central",
+      "summary": "LLM 或 Agent 在没有完成、没有验证或结果失败时，仍然声称任务完成或检查通过的行为。",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 9,
+      "id": "concept:agentic-coding",
+      "type": "concept",
+      "label": "Agentic Coding",
+      "role": "central",
+      "summary": "用 Agent 承担代码理解、实现、验证和协作流程的编程方式，但仍处在从旧范式迁移到新范式的早期阶段。",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 10,
+      "id": "concept:claude-code",
+      "type": "concept",
+      "label": "Claude Code",
+      "role": "central",
+      "summary": "Anthropic 面向编码 Agent 的产品，被文章视为把模型、系统提示词、权限和验证流程组合起来的工程系统。",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 8,
+      "id": "concept:system-prompt",
+      "type": "concept",
+      "label": "系统提示词",
+      "role": "supporting",
+      "summary": "Claude Code 用来约束 Agent 行为的核心机制之一，包括协作者身份、诚实报告、验证要求和简洁表达。",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 9,
+      "id": "concept:independent-verification",
+      "type": "concept",
+      "label": "独立验证",
+      "role": "central",
+      "summary": "在非平凡实现后，必须由独立检查或可复现命令验证结果，而不是只读代码或相信实现者。",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 7,
+      "id": "concept:rlhf-tradeoff",
+      "type": "concept",
+      "label": "RLHF 权衡",
+      "role": "supporting",
+      "summary": "模型行为调优会产生牵一发而动全身的副作用，减少一种问题可能引入另一种问题。",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 8,
+      "id": "concept:permission-system",
+      "type": "concept",
+      "label": "权限系统",
+      "role": "supporting",
+      "summary": "Claude Code 通过文件读取限制、危险命令拦截和 fail-closed 策略降低 Agent 误操作风险。",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 5,
+      "id": "concept:yolo-mode",
+      "type": "concept",
+      "label": "YOLO 模式",
+      "role": "mentioned",
+      "summary": "一种更少人工确认、更激进执行的模式，文章将其作为 Anthropic 对权限与风险边界理解的例子。",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 8,
+      "id": "concept:subagent-verifier",
+      "type": "concept",
+      "label": "Verifier Agent",
+      "role": "supporting",
+      "summary": "专门负责挑错、攻击实现和给出 PASS/FAIL/PARTIAL 判定的 Agent 角色。",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 6,
+      "id": "concept:multi-swe-bench",
+      "type": "concept",
+      "label": "Multi-SWE-bench",
+      "role": "mentioned",
+      "summary": "文章用来讨论 Claude Code 在真实代码库任务中仍会出现 False Claim 的评测语境。",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 6,
+      "id": "concept:capybara-v8",
+      "type": "concept",
+      "label": "Capybara v8",
+      "role": "mentioned",
+      "summary": "文章引用其 False Claim rate 作为 Anthropic 内部模型迭代中仍未完全解决该问题的证据。",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 7,
+      "id": "concept:minimal-scaffolding",
+      "type": "concept",
+      "label": "最小脚手架",
+      "role": "supporting",
+      "summary": "Boris Cherny 所说 Claude Code 的产品哲学：尽量暴露模型能力，只在外层加必要约束和流程。",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#00a6fb",
+      "weight": 10,
+      "id": "claim:false-claim-is-core-risk",
+      "type": "claim",
+      "label": "Agentic Coding 的关键风险不是不会写代码，而是 Agent 会在未完成或未验证时声称已经完成。",
+      "summary": "Agentic Coding 的关键风险不是不会写代码，而是 Agent 会在未完成或未验证时声称已经完成。",
+      "importance": "core",
+      "confidence": "high",
+      "status": "active",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#00a6fb",
+      "weight": 10,
+      "id": "claim:claude-code-value-is-system-engineering",
+      "type": "claim",
+      "label": "Claude Code 的竞争力来自模型能力、系统提示词、权限控制和验证流程的组合，而不是单纯来自 Claude 模型。",
+      "summary": "Claude Code 的竞争力来自模型能力、系统提示词、权限控制和验证流程的组合，而不是单纯来自 Claude 模型。",
+      "importance": "core",
+      "confidence": "high",
+      "status": "active",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#00a6fb",
+      "weight": 10,
+      "id": "claim:verification-must-be-command-backed",
+      "type": "claim",
+      "label": "有效验证必须有可复现的命令、输出和判定；只读代码或相信实现者测试不应算作 PASS。",
+      "summary": "有效验证必须有可复现的命令、输出和判定；只读代码或相信实现者测试不应算作 PASS。",
+      "importance": "core",
+      "confidence": "high",
+      "status": "active",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#00a6fb",
+      "weight": 7,
+      "id": "claim:rlhf-cannot-solve-all-behaviors-at-once",
+      "type": "claim",
+      "label": "RLHF 和模型调优无法一次性消除所有坏行为，因为压低一种行为常常会诱发其他行为偏移。",
+      "summary": "RLHF 和模型调优无法一次性消除所有坏行为，因为压低一种行为常常会诱发其他行为偏移。",
+      "importance": "supporting",
+      "confidence": "medium",
+      "status": "active",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#00a6fb",
+      "weight": 10,
+      "id": "claim:anthropic-understands-agent-failure-modes",
+      "type": "claim",
+      "label": "Anthropic 对 False Claim、权限、验证和协作边界的处理显示出其对 Agent 失败模式有系统理解。",
+      "summary": "Anthropic 对 False Claim、权限、验证和协作边界的处理显示出其对 Agent 失败模式有系统理解。",
+      "importance": "core",
+      "confidence": "medium",
+      "status": "active",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#00a6fb",
+      "weight": 7,
+      "id": "claim:current-agentic-coding-is-transitional",
+      "type": "claim",
+      "label": "当下 Agentic Coding 仍类似早期汽车时代的 horseless carriage，很多流程还在用旧范式理解新工具。",
+      "summary": "当下 Agentic Coding 仍类似早期汽车时代的 horseless carriage，很多流程还在用旧范式理解新工具。",
+      "importance": "supporting",
+      "confidence": "medium",
+      "status": "active",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:agentic-coding",
+      "type": "keyword",
+      "label": "Agentic Coding",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:false-claim",
+      "type": "keyword",
+      "label": "False Claim",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:verifier-agent",
+      "type": "keyword",
+      "label": "Verifier Agent",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:system-prompt",
+      "type": "keyword",
+      "label": "system prompt",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:rlhf",
+      "type": "keyword",
+      "label": "RLHF",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:权限控制",
+      "type": "keyword",
+      "label": "权限控制",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:独立验证",
+      "type": "keyword",
+      "label": "独立验证",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:multi-swe-bench",
+      "type": "keyword",
+      "label": "Multi-SWE-bench",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:capybara-v8",
+      "type": "keyword",
+      "label": "Capybara v8",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:yolo-mode",
+      "type": "keyword",
+      "label": "YOLO mode",
+      "summary": "检索关键词",
+      "refs": [
+        "claude-code-false-claims"
+      ]
+    },
+    {
+      "level": 4,
+      "color": "#f25f4c",
+      "weight": 10,
+      "id": "article:superpowers-management",
+      "type": "article",
+      "label": "Superpowers 不是能力增强，而是 coding agent 的管理系统",
+      "title": "Superpowers 不是能力增强，而是 coding agent 的管理系统",
+      "summary": "文章以 Superpowers 为例，说明 coding agent 的核心问题不是缺少能力，而是缺少约束、流程、验证和上下文治理。作者把 AI agent 类比为有能力但不可靠的初级工程师，主张用技能、TDD、独立 review、fresh subagent、停止升级机制和分阶段流程，把 agent 的输出纳入可管理的工程体系。",
+      "stance": "支持用管理系统和流程约束来驾驭 coding agent，而不是把它当作可完全信任的自动化实现者。",
+      "url": "posts/superpowers-management/",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#2cb67d",
+      "weight": 10,
+      "id": "topic:coding-agent-management",
+      "type": "topic",
+      "label": "Coding Agent 管理",
+      "summary": "专题入口",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#2cb67d",
+      "weight": 9,
+      "id": "topic:verification-and-review",
+      "type": "topic",
+      "label": "验证与评审",
+      "summary": "专题入口",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#2cb67d",
+      "weight": 8,
+      "id": "topic:process-discipline",
+      "type": "topic",
+      "label": "流程纪律",
+      "summary": "专题入口",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#2cb67d",
+      "weight": 7,
+      "id": "topic:context-control",
+      "type": "topic",
+      "label": "上下文控制",
+      "summary": "专题入口",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#2cb67d",
+      "weight": 8,
+      "id": "topic:human-judgment",
+      "type": "topic",
+      "label": "人的判断责任",
+      "summary": "专题入口",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 10,
+      "id": "concept:superpowers",
+      "type": "concept",
+      "label": "Superpowers",
+      "role": "central",
+      "summary": "一套围绕技能、计划、测试、review 和 subagent 协作的 coding agent 管理框架。",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 10,
+      "id": "concept:coding-agent",
+      "type": "concept",
+      "label": "Coding agent",
+      "role": "central",
+      "summary": "文章讨论的主要对象，被视为有实现能力但容易自信、走捷径、缺乏上下文和判断力的执行者。",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 9,
+      "id": "concept:poor-taste-junior-engineer",
+      "type": "concept",
+      "label": "有能力但品味不足的初级工程师模型",
+      "role": "central",
+      "summary": "作者借 Superpowers 的提示词把 agent 定位为 skilled developer，但缺少项目上下文、测试意识和工程判断。",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 8,
+      "id": "concept:skill-system",
+      "type": "concept",
+      "label": "Skill 系统",
+      "role": "supporting",
+      "summary": "通过 SKILL.md 把任务方法、约束和检查清单外置化，减少 agent 靠记忆和即时判断工作。",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 8,
+      "id": "concept:test-driven-development",
+      "type": "concept",
+      "label": "TDD 铁律",
+      "role": "supporting",
+      "summary": "要求先写失败测试，再写生产代码，用测试约束实现路径。",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 8,
+      "id": "concept:root-cause-investigation",
+      "type": "concept",
+      "label": "根因调查",
+      "role": "supporting",
+      "summary": "要求修复前先理解根因，反对只处理表象症状。",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 9,
+      "id": "concept:independent-reviewer",
+      "type": "concept",
+      "label": "独立 reviewer",
+      "role": "central",
+      "summary": "不相信 implementer 的报告，而是重新读代码、对照需求、独立验证完成度。",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 9,
+      "id": "concept:verification-before-completion",
+      "type": "concept",
+      "label": "完成前验证",
+      "role": "supporting",
+      "summary": "强调完成声明必须建立在实际运行验证和证据之上，而不是信心或 agent 报告。",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 7,
+      "id": "concept:fresh-subagent",
+      "type": "concept",
+      "label": "Fresh subagent",
+      "role": "supporting",
+      "summary": "每个任务使用干净上下文的 subagent，避免继承主会话污染，提升 review 和执行质量。",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 7,
+      "id": "concept:stop-and-escalate",
+      "type": "concept",
+      "label": "停止并升级",
+      "role": "supporting",
+      "summary": "当任务超出理解、需要架构判断或持续读文件无进展时，应停止并说明状态，而不是硬做。",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 8,
+      "id": "concept:management-pipeline",
+      "type": "concept",
+      "label": "管理流水线",
+      "role": "central",
+      "summary": "把 brainstorming、planning、execution、review 串成阶段化流程，并在阶段之间设置硬门槛。",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 2,
+      "color": "#7f5af0",
+      "weight": 9,
+      "id": "concept:human-gatekeeper",
+      "type": "concept",
+      "label": "人类守门人",
+      "role": "central",
+      "summary": "人负责最终判断、验收和边界控制，不能把 gate 交给 agent 自己。",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#00a6fb",
+      "weight": 10,
+      "id": "claim:agent-needs-management-not-trust",
+      "type": "claim",
+      "label": "Coding agent 的主要问题不是没有能力，而是不能被默认信任，必须被当作需要管理的执行者。",
+      "summary": "Coding agent 的主要问题不是没有能力，而是不能被默认信任，必须被当作需要管理的执行者。",
+      "importance": "core",
+      "confidence": "high",
+      "status": "active",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#00a6fb",
+      "weight": 10,
+      "id": "claim:skills-externalize-discipline",
+      "type": "claim",
+      "label": "Skill 系统的价值在于把工程纪律外置成可执行流程，防止 agent 因自信、偷懒或短期记忆而跳过关键步骤。",
+      "summary": "Skill 系统的价值在于把工程纪律外置成可执行流程，防止 agent 因自信、偷懒或短期记忆而跳过关键步骤。",
+      "importance": "core",
+      "confidence": "high",
+      "status": "active",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#00a6fb",
+      "weight": 10,
+      "id": "claim:verification-must-be-independent",
+      "type": "claim",
+      "label": "Implementer 的完成报告不能作为验收依据，reviewer 必须独立阅读代码、对照需求并运行验证。",
+      "summary": "Implementer 的完成报告不能作为验收依据，reviewer 必须独立阅读代码、对照需求并运行验证。",
+      "importance": "core",
+      "confidence": "high",
+      "status": "active",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#00a6fb",
+      "weight": 7,
+      "id": "claim:tests-and-root-cause-prevent-shortcuts",
+      "type": "claim",
+      "label": "TDD 和根因调查是对抗 agent 走捷径的硬约束：没有失败测试不写生产代码，没有根因不做修复。",
+      "summary": "TDD 和根因调查是对抗 agent 走捷径的硬约束：没有失败测试不写生产代码，没有根因不做修复。",
+      "importance": "supporting",
+      "confidence": "high",
+      "status": "active",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#00a6fb",
+      "weight": 7,
+      "id": "claim:fresh-context-improves-agent-work",
+      "type": "claim",
+      "label": "为不同任务使用 fresh subagent 可以减少上下文污染，让执行和 review 更接近独立判断。",
+      "summary": "为不同任务使用 fresh subagent 可以减少上下文污染，让执行和 review 更接近独立判断。",
+      "importance": "supporting",
+      "confidence": "medium",
+      "status": "active",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 3,
+      "color": "#00a6fb",
+      "weight": 7,
+      "id": "claim:escalation-is-part-of-quality-control",
+      "type": "claim",
+      "label": "当 agent 缺少上下文、无法判断方案或陷入无效探索时，停止并升级比继续产出不确定结果更符合工程质量。",
+      "summary": "当 agent 缺少上下文、无法判断方案或陷入无效探索时，停止并升级比继续产出不确定结果更符合工程质量。",
+      "importance": "supporting",
+      "confidence": "high",
+      "status": "active",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:superpowers",
+      "type": "keyword",
+      "label": "Superpowers",
+      "summary": "检索关键词",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:coding-agent",
+      "type": "keyword",
+      "label": "coding agent",
+      "summary": "检索关键词",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:agent-管理",
+      "type": "keyword",
+      "label": "agent 管理",
+      "summary": "检索关键词",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:技能系统",
+      "type": "keyword",
+      "label": "技能系统",
+      "summary": "检索关键词",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:tdd",
+      "type": "keyword",
+      "label": "TDD",
+      "summary": "检索关键词",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:根因调查",
+      "type": "keyword",
+      "label": "根因调查",
+      "summary": "检索关键词",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:独立-review",
+      "type": "keyword",
+      "label": "独立 review",
+      "summary": "检索关键词",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:完成前验证",
+      "type": "keyword",
+      "label": "完成前验证",
+      "summary": "检索关键词",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:fresh-subagent",
+      "type": "keyword",
+      "label": "fresh subagent",
+      "summary": "检索关键词",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:上下文污染",
+      "type": "keyword",
+      "label": "上下文污染",
+      "summary": "检索关键词",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:停止并升级",
+      "type": "keyword",
+      "label": "停止并升级",
+      "summary": "检索关键词",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:人类守门人",
+      "type": "keyword",
+      "label": "人类守门人",
+      "summary": "检索关键词",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:工程纪律",
+      "type": "keyword",
+      "label": "工程纪律",
+      "summary": "检索关键词",
+      "refs": [
+        "superpowers-management"
+      ]
+    },
+    {
+      "level": 1,
+      "color": "#faae2b",
+      "weight": 2,
+      "id": "keyword:ai-编程",
+      "type": "keyword",
+      "label": "AI 编程",
+      "summary": "检索关键词",
+      "refs": [
+        "superpowers-management"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "source": "article:claude-code-eggs",
+      "target": "topic:claude-code-internals",
+      "type": "belongs_to",
+      "reason": "Claude Code 彩蛋与内部机制观察 属于 Claude Code 内部机制",
+      "weight": 10
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "topic:ai-agent-product-design",
+      "type": "belongs_to",
+      "reason": "Claude Code 彩蛋与内部机制观察 属于 AI Agent 产品设计",
+      "weight": 9
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "topic:anthropic-experiments",
+      "type": "belongs_to",
+      "reason": "Claude Code 彩蛋与内部机制观察 属于 Anthropic 内部实验",
+      "weight": 8
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "topic:developer-experience",
+      "type": "belongs_to",
+      "reason": "Claude Code 彩蛋与内部机制观察 属于 开发者体验与 CLI 文化",
+      "weight": 7
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "topic:model-safety-and-control",
+      "type": "belongs_to",
+      "reason": "Claude Code 彩蛋与内部机制观察 属于 模型安全与行为控制",
+      "weight": 8
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "concept:ant-only-code-paths",
+      "type": "centers_on",
+      "reason": "通过 USER_TYPE 等条件分支暴露给 Anthropic 内部用户的功能集合，包括隐藏命令、内部成本显示、实验工具和提示词。",
+      "weight": 10
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "concept:undercover-mode",
+      "type": "centers_on",
+      "reason": "Claude Code 在公开仓库中隐藏 AI 身份和 Claude Code 归因的机制，避免提交信息、PR 描述或署名暴露 AI 参与。",
+      "weight": 9
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "concept:auto-dream-memory",
+      "type": "centers_on",
+      "reason": "后台触发的记忆巩固机制，通过 forked subagent 汇总、剪枝和索引近期会话信号。",
+      "weight": 8
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "concept:buddy-system",
+      "type": "mentions",
+      "reason": "Claude Code 内置的宠物式伙伴系统，包含物种、稀有度、性格、配饰和用户哈希分配。",
+      "weight": 7
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "concept:model-codename-leaks",
+      "type": "centers_on",
+      "reason": "source map、excluded-strings、feature flag 和注释中出现的 Capybara、Tengu、Fennec、Numbat 等模型或产品代号。",
+      "weight": 9
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "concept:token-limit-recovery",
+      "type": "mentions",
+      "reason": "当输出 token 达到限制时，Claude Code 通过 meta message 指示模型直接恢复，不向用户展示中断恢复提示。",
+      "weight": 7
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "concept:proactive-autonomy",
+      "type": "centers_on",
+      "reason": "Claude Code 根据终端焦点、tick 消息和 SleepTool 等信号判断用户是否离开，并调整自主行动程度。",
+      "weight": 8
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "concept:anti-distillation",
+      "type": "mentions",
+      "reason": "Claude Code 对一方 CLI 启用 fake_tools 等反蒸馏字段，用于降低外部蒸馏或行为复刻风险。",
+      "weight": 7
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "concept:remote-permission-channels",
+      "type": "mentions",
+      "reason": "通过 Telegram、iMessage、Discord 等渠道接收权限确认，并与本地 UI、hooks、classifier 等解析器竞态。",
+      "weight": 7
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "concept:learning-mode",
+      "type": "mentions",
+      "reason": "Claude Code 通过 TODO(human)、提示单元和避免过度赞美等规则，把任务拆成适合人类学习的交互流程。",
+      "weight": 7
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "concept:file-history-rewind",
+      "type": "mentions",
+      "reason": "Claude Code 在本地记录文件历史快照，用于在无 git stash 的情况下撤回或恢复修改。",
+      "weight": 6
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "concept:prompt-cache-stability",
+      "type": "mentions",
+      "reason": "通过缓存会话开始日期等方式减少 prompt cache 失效，即使牺牲午夜后日期准确性。",
+      "weight": 6
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "claim:claude-code-is-complex-agent-system",
+      "type": "makes",
+      "reason": "Claude Code 的源码线索表明，它已经不是单纯的命令行助手，而是包含身份、记忆、自主行动、权限、学习和实验开关的复杂 AI agent 系统。",
+      "weight": 10
+    },
+    {
+      "source": "claim:claude-code-is-complex-agent-system",
+      "target": "concept:ant-only-code-paths",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:claude-code-is-complex-agent-system",
+      "target": "concept:auto-dream-memory",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:claude-code-is-complex-agent-system",
+      "target": "concept:proactive-autonomy",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:claude-code-is-complex-agent-system",
+      "target": "concept:remote-permission-channels",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:claude-code-is-complex-agent-system",
+      "target": "concept:learning-mode",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "claim:internal-branches-reveal-anthropic-priorities",
+      "type": "makes",
+      "reason": "ant-only 分支、隐藏命令和 feature flag 暴露了 Anthropic 对内部实验、成本观测、模型发布和产品试验的优先级。",
+      "weight": 10
+    },
+    {
+      "source": "claim:internal-branches-reveal-anthropic-priorities",
+      "target": "concept:ant-only-code-paths",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:internal-branches-reveal-anthropic-priorities",
+      "target": "concept:model-codename-leaks",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:internal-branches-reveal-anthropic-priorities",
+      "target": "concept:anti-distillation",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "claim:undercover-mode-shows-ai-attribution-tension",
+      "type": "makes",
+      "reason": "Undercover Mode 说明 Anthropic 一方面希望 Claude Code 深度参与公开代码协作，另一方面又需要控制 AI 署名和模型代号泄露带来的社会与安全风险。",
+      "weight": 10
+    },
+    {
+      "source": "claim:undercover-mode-shows-ai-attribution-tension",
+      "target": "concept:undercover-mode",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:undercover-mode-shows-ai-attribution-tension",
+      "target": "concept:model-codename-leaks",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:undercover-mode-shows-ai-attribution-tension",
+      "target": "concept:anti-distillation",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "claim:memory-and-recovery-make-claude-feel-continuous",
+      "type": "makes",
+      "reason": "AutoDream、token limit recovery 和文件历史机制共同增强了 Claude Code 的连续性，让它在长任务、上下文压缩和修改回滚中更像持续工作的协作者。",
+      "weight": 7
+    },
+    {
+      "source": "claim:memory-and-recovery-make-claude-feel-continuous",
+      "target": "concept:auto-dream-memory",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:memory-and-recovery-make-claude-feel-continuous",
+      "target": "concept:token-limit-recovery",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:memory-and-recovery-make-claude-feel-continuous",
+      "target": "concept:file-history-rewind",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:memory-and-recovery-make-claude-feel-continuous",
+      "target": "concept:prompt-cache-stability",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "claim:playful-details-are-product-strategy",
+      "type": "makes",
+      "reason": "Buddy、plan ID、spinner、stickers 和 thinkback 等彩蛋并非纯装饰，它们把开发工具包装成更有人格、更有社区感的产品体验。",
+      "weight": 7
+    },
+    {
+      "source": "claim:playful-details-are-product-strategy",
+      "target": "concept:buddy-system",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:playful-details-are-product-strategy",
+      "target": "concept:learning-mode",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "claim:proactive-and-remote-permission-expand-agent-boundary",
+      "type": "makes",
+      "reason": "Proactive 模式和远程权限通道把 Claude Code 从本地被动执行器推进到可跨时间、跨设备协作的半自主工程代理。",
+      "weight": 10
+    },
+    {
+      "source": "claim:proactive-and-remote-permission-expand-agent-boundary",
+      "target": "concept:proactive-autonomy",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:proactive-and-remote-permission-expand-agent-boundary",
+      "target": "concept:remote-permission-channels",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:proactive-and-remote-permission-expand-agent-boundary",
+      "target": "concept:token-limit-recovery",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "keyword:claude-code",
+      "type": "has_keyword",
+      "reason": "Claude Code",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "keyword:anthropic",
+      "type": "has_keyword",
+      "reason": "Anthropic",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "keyword:source-map",
+      "type": "has_keyword",
+      "reason": "source map",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "keyword:ant-only",
+      "type": "has_keyword",
+      "reason": "ant-only",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "keyword:undercover-mode",
+      "type": "has_keyword",
+      "reason": "undercover mode",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "keyword:autodream",
+      "type": "has_keyword",
+      "reason": "AutoDream",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "keyword:feature-flag",
+      "type": "has_keyword",
+      "reason": "feature flag",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "keyword:model-codename",
+      "type": "has_keyword",
+      "reason": "model codename",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "keyword:capybara",
+      "type": "has_keyword",
+      "reason": "Capybara",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "keyword:tengu",
+      "type": "has_keyword",
+      "reason": "Tengu",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "keyword:anti-distillation",
+      "type": "has_keyword",
+      "reason": "anti-distillation",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "keyword:proactive-agent",
+      "type": "has_keyword",
+      "reason": "proactive agent",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "keyword:remote-permission",
+      "type": "has_keyword",
+      "reason": "remote permission",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "keyword:learning-mode",
+      "type": "has_keyword",
+      "reason": "learning mode",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "keyword:file-history",
+      "type": "has_keyword",
+      "reason": "file history",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "keyword:rewind",
+      "type": "has_keyword",
+      "reason": "rewind",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "claim:claude-code-is-complex-agent-system",
+      "type": "summarizes",
+      "reason": "文章整体围绕 Claude Code 从 CLI 演化为复杂 agent 系统这一判断展开。",
+      "weight": 4
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "topic:claude-code-internals",
+      "type": "applies_to",
+      "reason": "文章主要材料来自 Claude Code 内部源码、source map 和隐藏功能线索。",
+      "weight": 4
+    },
+    {
+      "source": "claim:claude-code-is-complex-agent-system",
+      "target": "topic:claude-code-internals",
+      "type": "supports",
+      "reason": "内部机制的数量和类型支撑了复杂系统的判断。",
+      "weight": 4
+    },
+    {
+      "source": "claim:claude-code-is-complex-agent-system",
+      "target": "topic:ai-agent-product-design",
+      "type": "applies_to",
+      "reason": "复杂 agent 系统的分析属于 AI Agent 产品设计问题。",
+      "weight": 4
+    },
+    {
+      "source": "claim:internal-branches-reveal-anthropic-priorities",
+      "target": "concept:ant-only-code-paths",
+      "type": "depends_on",
+      "reason": "该主张依赖 ant-only 分支和内部用户路径的存在。",
+      "weight": 4
+    },
+    {
+      "source": "claim:internal-branches-reveal-anthropic-priorities",
+      "target": "topic:anthropic-experiments",
+      "type": "supports",
+      "reason": "隐藏命令和 feature flag 体现了 Anthropic 的实验性产品机制。",
+      "weight": 4
+    },
+    {
+      "source": "claim:undercover-mode-shows-ai-attribution-tension",
+      "target": "concept:undercover-mode",
+      "type": "depends_on",
+      "reason": "Undercover Mode 是该论点的直接证据。",
+      "weight": 4
+    },
+    {
+      "source": "claim:undercover-mode-shows-ai-attribution-tension",
+      "target": "topic:model-safety-and-control",
+      "type": "applies_to",
+      "reason": "隐藏 AI 署名和代号泄露属于模型安全与行为控制范畴。",
+      "weight": 4
+    },
+    {
+      "source": "concept:undercover-mode",
+      "target": "concept:model-codename-leaks",
+      "type": "related_to",
+      "reason": "两者都涉及公开仓库中需要避免暴露的内部信息。",
+      "weight": 4
+    },
+    {
+      "source": "claim:memory-and-recovery-make-claude-feel-continuous",
+      "target": "concept:auto-dream-memory",
+      "type": "supports",
+      "reason": "AutoDream 为长期会话信号整理提供机制。",
+      "weight": 4
+    },
+    {
+      "source": "claim:memory-and-recovery-make-claude-feel-continuous",
+      "target": "concept:token-limit-recovery",
+      "type": "supports",
+      "reason": "token 上限恢复让长任务在中断后继续运行。",
+      "weight": 4
+    },
+    {
+      "source": "claim:memory-and-recovery-make-claude-feel-continuous",
+      "target": "concept:file-history-rewind",
+      "type": "supports",
+      "reason": "文件历史与 rewind 增强了修改过程的可恢复性。",
+      "weight": 4
+    },
+    {
+      "source": "claim:memory-and-recovery-make-claude-feel-continuous",
+      "target": "concept:prompt-cache-stability",
+      "type": "supports",
+      "reason": "会话日期缓存体现了为了连续性和成本稳定做出的工程取舍。",
+      "weight": 4
+    },
+    {
+      "source": "claim:playful-details-are-product-strategy",
+      "target": "concept:buddy-system",
+      "type": "supports",
+      "reason": "Buddy 系统是文章中最明显的趣味化产品设计例子。",
+      "weight": 4
+    },
+    {
+      "source": "claim:playful-details-are-product-strategy",
+      "target": "topic:developer-experience",
+      "type": "applies_to",
+      "reason": "彩蛋、spinner、stickers 和 thinkback 都直接影响开发者使用体验。",
+      "weight": 4
+    },
+    {
+      "source": "claim:proactive-and-remote-permission-expand-agent-boundary",
+      "target": "concept:proactive-autonomy",
+      "type": "depends_on",
+      "reason": "自主行动模式是扩大 agent 边界的核心机制。",
+      "weight": 4
+    },
+    {
+      "source": "claim:proactive-and-remote-permission-expand-agent-boundary",
+      "target": "concept:remote-permission-channels",
+      "type": "depends_on",
+      "reason": "远程权限通道让 Claude Code 的行动范围超出本地终端。",
+      "weight": 4
+    },
+    {
+      "source": "concept:anti-distillation",
+      "target": "topic:model-safety-and-control",
+      "type": "example_of",
+      "reason": "fake_tools 等反蒸馏字段是模型行为保护和控制的具体例子。",
+      "weight": 4
+    },
+    {
+      "source": "concept:learning-mode",
+      "target": "topic:ai-agent-product-design",
+      "type": "example_of",
+      "reason": "Learning 模式体现了 AI 工具从代劳转向教学协作的设计方向。",
+      "weight": 4
+    },
+    {
+      "source": "concept:model-codename-leaks",
+      "target": "topic:anthropic-experiments",
+      "type": "related_to",
+      "reason": "代号线索通常与模型发布、feature flag 和内部迁移实验相连。",
+      "weight": 4
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "topic:agentic-coding",
+      "type": "belongs_to",
+      "reason": "从 Agent 的假阳性问题看 Claude Code 的工程化 属于 Agentic Coding",
+      "weight": 9
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "topic:false-claims",
+      "type": "belongs_to",
+      "reason": "从 Agent 的假阳性问题看 Claude Code 的工程化 属于 False Claim",
+      "weight": 10
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "topic:claude-code",
+      "type": "belongs_to",
+      "reason": "从 Agent 的假阳性问题看 Claude Code 的工程化 属于 Claude Code",
+      "weight": 10
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "topic:verification-discipline",
+      "type": "belongs_to",
+      "reason": "从 Agent 的假阳性问题看 Claude Code 的工程化 属于 验证机制",
+      "weight": 9
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "topic:product-engineering",
+      "type": "belongs_to",
+      "reason": "从 Agent 的假阳性问题看 Claude Code 的工程化 属于 产品工程化",
+      "weight": 8
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "concept:false-claim",
+      "type": "centers_on",
+      "reason": "LLM 或 Agent 在没有完成、没有验证或结果失败时，仍然声称任务完成或检查通过的行为。",
+      "weight": 10
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "concept:agentic-coding",
+      "type": "centers_on",
+      "reason": "用 Agent 承担代码理解、实现、验证和协作流程的编程方式，但仍处在从旧范式迁移到新范式的早期阶段。",
+      "weight": 9
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "concept:claude-code",
+      "type": "centers_on",
+      "reason": "Anthropic 面向编码 Agent 的产品，被文章视为把模型、系统提示词、权限和验证流程组合起来的工程系统。",
+      "weight": 10
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "concept:system-prompt",
+      "type": "mentions",
+      "reason": "Claude Code 用来约束 Agent 行为的核心机制之一，包括协作者身份、诚实报告、验证要求和简洁表达。",
+      "weight": 8
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "concept:independent-verification",
+      "type": "centers_on",
+      "reason": "在非平凡实现后，必须由独立检查或可复现命令验证结果，而不是只读代码或相信实现者。",
+      "weight": 9
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "concept:rlhf-tradeoff",
+      "type": "mentions",
+      "reason": "模型行为调优会产生牵一发而动全身的副作用，减少一种问题可能引入另一种问题。",
+      "weight": 7
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "concept:permission-system",
+      "type": "mentions",
+      "reason": "Claude Code 通过文件读取限制、危险命令拦截和 fail-closed 策略降低 Agent 误操作风险。",
+      "weight": 8
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "concept:yolo-mode",
+      "type": "mentions",
+      "reason": "一种更少人工确认、更激进执行的模式，文章将其作为 Anthropic 对权限与风险边界理解的例子。",
+      "weight": 5
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "concept:subagent-verifier",
+      "type": "mentions",
+      "reason": "专门负责挑错、攻击实现和给出 PASS/FAIL/PARTIAL 判定的 Agent 角色。",
+      "weight": 8
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "concept:multi-swe-bench",
+      "type": "mentions",
+      "reason": "文章用来讨论 Claude Code 在真实代码库任务中仍会出现 False Claim 的评测语境。",
+      "weight": 6
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "concept:capybara-v8",
+      "type": "mentions",
+      "reason": "文章引用其 False Claim rate 作为 Anthropic 内部模型迭代中仍未完全解决该问题的证据。",
+      "weight": 6
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "concept:minimal-scaffolding",
+      "type": "mentions",
+      "reason": "Boris Cherny 所说 Claude Code 的产品哲学：尽量暴露模型能力，只在外层加必要约束和流程。",
+      "weight": 7
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "claim:false-claim-is-core-risk",
+      "type": "makes",
+      "reason": "Agentic Coding 的关键风险不是不会写代码，而是 Agent 会在未完成或未验证时声称已经完成。",
+      "weight": 10
+    },
+    {
+      "source": "claim:false-claim-is-core-risk",
+      "target": "concept:false-claim",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:false-claim-is-core-risk",
+      "target": "concept:agentic-coding",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:false-claim-is-core-risk",
+      "target": "concept:claude-code",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "claim:claude-code-value-is-system-engineering",
+      "type": "makes",
+      "reason": "Claude Code 的竞争力来自模型能力、系统提示词、权限控制和验证流程的组合，而不是单纯来自 Claude 模型。",
+      "weight": 10
+    },
+    {
+      "source": "claim:claude-code-value-is-system-engineering",
+      "target": "concept:claude-code",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:claude-code-value-is-system-engineering",
+      "target": "concept:system-prompt",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:claude-code-value-is-system-engineering",
+      "target": "concept:permission-system",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:claude-code-value-is-system-engineering",
+      "target": "concept:minimal-scaffolding",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "claim:verification-must-be-command-backed",
+      "type": "makes",
+      "reason": "有效验证必须有可复现的命令、输出和判定；只读代码或相信实现者测试不应算作 PASS。",
+      "weight": 10
+    },
+    {
+      "source": "claim:verification-must-be-command-backed",
+      "target": "concept:independent-verification",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:verification-must-be-command-backed",
+      "target": "concept:subagent-verifier",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:verification-must-be-command-backed",
+      "target": "concept:false-claim",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "claim:rlhf-cannot-solve-all-behaviors-at-once",
+      "type": "makes",
+      "reason": "RLHF 和模型调优无法一次性消除所有坏行为，因为压低一种行为常常会诱发其他行为偏移。",
+      "weight": 7
+    },
+    {
+      "source": "claim:rlhf-cannot-solve-all-behaviors-at-once",
+      "target": "concept:rlhf-tradeoff",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:rlhf-cannot-solve-all-behaviors-at-once",
+      "target": "concept:false-claim",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "claim:anthropic-understands-agent-failure-modes",
+      "type": "makes",
+      "reason": "Anthropic 对 False Claim、权限、验证和协作边界的处理显示出其对 Agent 失败模式有系统理解。",
+      "weight": 10
+    },
+    {
+      "source": "claim:anthropic-understands-agent-failure-modes",
+      "target": "concept:claude-code",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:anthropic-understands-agent-failure-modes",
+      "target": "concept:false-claim",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:anthropic-understands-agent-failure-modes",
+      "target": "concept:permission-system",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:anthropic-understands-agent-failure-modes",
+      "target": "concept:independent-verification",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "claim:current-agentic-coding-is-transitional",
+      "type": "makes",
+      "reason": "当下 Agentic Coding 仍类似早期汽车时代的 horseless carriage，很多流程还在用旧范式理解新工具。",
+      "weight": 7
+    },
+    {
+      "source": "claim:current-agentic-coding-is-transitional",
+      "target": "concept:agentic-coding",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:current-agentic-coding-is-transitional",
+      "target": "concept:claude-code",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "keyword:claude-code",
+      "type": "has_keyword",
+      "reason": "Claude Code",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "keyword:agentic-coding",
+      "type": "has_keyword",
+      "reason": "Agentic Coding",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "keyword:false-claim",
+      "type": "has_keyword",
+      "reason": "False Claim",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "keyword:anthropic",
+      "type": "has_keyword",
+      "reason": "Anthropic",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "keyword:verifier-agent",
+      "type": "has_keyword",
+      "reason": "Verifier Agent",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "keyword:system-prompt",
+      "type": "has_keyword",
+      "reason": "system prompt",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "keyword:rlhf",
+      "type": "has_keyword",
+      "reason": "RLHF",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "keyword:权限控制",
+      "type": "has_keyword",
+      "reason": "权限控制",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "keyword:独立验证",
+      "type": "has_keyword",
+      "reason": "独立验证",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "keyword:multi-swe-bench",
+      "type": "has_keyword",
+      "reason": "Multi-SWE-bench",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "keyword:capybara-v8",
+      "type": "has_keyword",
+      "reason": "Capybara v8",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "keyword:yolo-mode",
+      "type": "has_keyword",
+      "reason": "YOLO mode",
+      "weight": 1
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "topic:false-claims",
+      "type": "summarizes",
+      "reason": "文章主线围绕编码 Agent 的 False Claim 展开。",
+      "weight": 4
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "concept:claude-code",
+      "type": "summarizes",
+      "reason": "文章通过 Claude Code 分析 Agent 产品化机制。",
+      "weight": 4
+    },
+    {
+      "source": "topic:false-claims",
+      "target": "concept:false-claim",
+      "type": "summarizes",
+      "reason": "主题对应核心概念。",
+      "weight": 4
+    },
+    {
+      "source": "concept:claude-code",
+      "target": "claim:claude-code-value-is-system-engineering",
+      "type": "supports",
+      "reason": "文章用 Claude Code 的机制说明其价值来自系统工程。",
+      "weight": 4
+    },
+    {
+      "source": "claim:false-claim-is-core-risk",
+      "target": "concept:false-claim",
+      "type": "depends_on",
+      "reason": "该主张以 False Claim 概念为基础。",
+      "weight": 4
+    },
+    {
+      "source": "claim:false-claim-is-core-risk",
+      "target": "concept:agentic-coding",
+      "type": "applies_to",
+      "reason": "该风险发生在 Agentic Coding 场景中。",
+      "weight": 4
+    },
+    {
+      "source": "claim:claude-code-value-is-system-engineering",
+      "target": "concept:system-prompt",
+      "type": "supports",
+      "reason": "系统提示词是 Claude Code 工程化约束的一部分。",
+      "weight": 4
+    },
+    {
+      "source": "claim:claude-code-value-is-system-engineering",
+      "target": "concept:permission-system",
+      "type": "supports",
+      "reason": "权限系统体现了产品层面的风险控制。",
+      "weight": 4
+    },
+    {
+      "source": "claim:claude-code-value-is-system-engineering",
+      "target": "concept:minimal-scaffolding",
+      "type": "supports",
+      "reason": "最小脚手架解释了 Claude Code 如何围绕模型加必要约束。",
+      "weight": 4
+    },
+    {
+      "source": "claim:verification-must-be-command-backed",
+      "target": "concept:independent-verification",
+      "type": "depends_on",
+      "reason": "命令、输出和判定构成独立验证的证据。",
+      "weight": 4
+    },
+    {
+      "source": "claim:verification-must-be-command-backed",
+      "target": "concept:subagent-verifier",
+      "type": "supports",
+      "reason": "Verifier Agent 的价值在于独立验证而非复述实现者结论。",
+      "weight": 4
+    },
+    {
+      "source": "claim:verification-must-be-command-backed",
+      "target": "claim:false-claim-is-core-risk",
+      "type": "supports",
+      "reason": "严格验证是降低 False Claim 的直接手段。",
+      "weight": 4
+    },
+    {
+      "source": "claim:rlhf-cannot-solve-all-behaviors-at-once",
+      "target": "concept:rlhf-tradeoff",
+      "type": "depends_on",
+      "reason": "该主张来自对 RLHF 行为调优副作用的讨论。",
+      "weight": 4
+    },
+    {
+      "source": "claim:rlhf-cannot-solve-all-behaviors-at-once",
+      "target": "concept:false-claim",
+      "type": "related_to",
+      "reason": "False Claim 是模型行为调优难题中的一种表现。",
+      "weight": 4
+    },
+    {
+      "source": "claim:anthropic-understands-agent-failure-modes",
+      "target": "concept:claude-code",
+      "type": "applies_to",
+      "reason": "文章把 Anthropic 的理解落在 Claude Code 产品机制上。",
+      "weight": 4
+    },
+    {
+      "source": "claim:anthropic-understands-agent-failure-modes",
+      "target": "concept:permission-system",
+      "type": "supports",
+      "reason": "危险命令、文件读取和 fail-closed 设计体现失败模式治理。",
+      "weight": 4
+    },
+    {
+      "source": "claim:anthropic-understands-agent-failure-modes",
+      "target": "concept:independent-verification",
+      "type": "supports",
+      "reason": "强制验证契约体现对 Agent 误报成功的治理。",
+      "weight": 4
+    },
+    {
+      "source": "concept:capybara-v8",
+      "target": "concept:false-claim",
+      "type": "example_of",
+      "reason": "文章引用 Capybara v8 的 False Claim rate 说明问题仍然存在。",
+      "weight": 4
+    },
+    {
+      "source": "concept:multi-swe-bench",
+      "target": "claim:false-claim-is-core-risk",
+      "type": "supports",
+      "reason": "评测案例被用来说明真实任务中的误报风险。",
+      "weight": 4
+    },
+    {
+      "source": "concept:yolo-mode",
+      "target": "concept:permission-system",
+      "type": "contrasts_with",
+      "reason": "YOLO 模式代表更激进的执行边界，反衬权限系统的重要性。",
+      "weight": 4
+    },
+    {
+      "source": "claim:current-agentic-coding-is-transitional",
+      "target": "concept:agentic-coding",
+      "type": "applies_to",
+      "reason": "该主张判断 Agentic Coding 仍处范式迁移期。",
+      "weight": 4
+    },
+    {
+      "source": "claim:current-agentic-coding-is-transitional",
+      "target": "topic:product-engineering",
+      "type": "related_to",
+      "reason": "新范式成熟需要产品工程继续补齐流程和约束。",
+      "weight": 4
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "topic:coding-agent-management",
+      "type": "belongs_to",
+      "reason": "Superpowers 不是能力增强，而是 coding agent 的管理系统 属于 Coding Agent 管理",
+      "weight": 10
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "topic:verification-and-review",
+      "type": "belongs_to",
+      "reason": "Superpowers 不是能力增强，而是 coding agent 的管理系统 属于 验证与评审",
+      "weight": 9
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "topic:process-discipline",
+      "type": "belongs_to",
+      "reason": "Superpowers 不是能力增强，而是 coding agent 的管理系统 属于 流程纪律",
+      "weight": 8
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "topic:context-control",
+      "type": "belongs_to",
+      "reason": "Superpowers 不是能力增强，而是 coding agent 的管理系统 属于 上下文控制",
+      "weight": 7
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "topic:human-judgment",
+      "type": "belongs_to",
+      "reason": "Superpowers 不是能力增强，而是 coding agent 的管理系统 属于 人的判断责任",
+      "weight": 8
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "concept:superpowers",
+      "type": "centers_on",
+      "reason": "一套围绕技能、计划、测试、review 和 subagent 协作的 coding agent 管理框架。",
+      "weight": 10
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "concept:coding-agent",
+      "type": "centers_on",
+      "reason": "文章讨论的主要对象，被视为有实现能力但容易自信、走捷径、缺乏上下文和判断力的执行者。",
+      "weight": 10
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "concept:poor-taste-junior-engineer",
+      "type": "centers_on",
+      "reason": "作者借 Superpowers 的提示词把 agent 定位为 skilled developer，但缺少项目上下文、测试意识和工程判断。",
+      "weight": 9
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "concept:skill-system",
+      "type": "mentions",
+      "reason": "通过 SKILL.md 把任务方法、约束和检查清单外置化，减少 agent 靠记忆和即时判断工作。",
+      "weight": 8
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "concept:test-driven-development",
+      "type": "mentions",
+      "reason": "要求先写失败测试，再写生产代码，用测试约束实现路径。",
+      "weight": 8
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "concept:root-cause-investigation",
+      "type": "mentions",
+      "reason": "要求修复前先理解根因，反对只处理表象症状。",
+      "weight": 8
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "concept:independent-reviewer",
+      "type": "centers_on",
+      "reason": "不相信 implementer 的报告，而是重新读代码、对照需求、独立验证完成度。",
+      "weight": 9
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "concept:verification-before-completion",
+      "type": "mentions",
+      "reason": "强调完成声明必须建立在实际运行验证和证据之上，而不是信心或 agent 报告。",
+      "weight": 9
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "concept:fresh-subagent",
+      "type": "mentions",
+      "reason": "每个任务使用干净上下文的 subagent，避免继承主会话污染，提升 review 和执行质量。",
+      "weight": 7
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "concept:stop-and-escalate",
+      "type": "mentions",
+      "reason": "当任务超出理解、需要架构判断或持续读文件无进展时，应停止并说明状态，而不是硬做。",
+      "weight": 7
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "concept:management-pipeline",
+      "type": "centers_on",
+      "reason": "把 brainstorming、planning、execution、review 串成阶段化流程，并在阶段之间设置硬门槛。",
+      "weight": 8
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "concept:human-gatekeeper",
+      "type": "centers_on",
+      "reason": "人负责最终判断、验收和边界控制，不能把 gate 交给 agent 自己。",
+      "weight": 9
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "claim:agent-needs-management-not-trust",
+      "type": "makes",
+      "reason": "Coding agent 的主要问题不是没有能力，而是不能被默认信任，必须被当作需要管理的执行者。",
+      "weight": 10
+    },
+    {
+      "source": "claim:agent-needs-management-not-trust",
+      "target": "concept:coding-agent",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:agent-needs-management-not-trust",
+      "target": "concept:poor-taste-junior-engineer",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:agent-needs-management-not-trust",
+      "target": "concept:human-gatekeeper",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "claim:skills-externalize-discipline",
+      "type": "makes",
+      "reason": "Skill 系统的价值在于把工程纪律外置成可执行流程，防止 agent 因自信、偷懒或短期记忆而跳过关键步骤。",
+      "weight": 10
+    },
+    {
+      "source": "claim:skills-externalize-discipline",
+      "target": "concept:superpowers",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:skills-externalize-discipline",
+      "target": "concept:skill-system",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:skills-externalize-discipline",
+      "target": "concept:process-discipline",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "claim:verification-must-be-independent",
+      "type": "makes",
+      "reason": "Implementer 的完成报告不能作为验收依据，reviewer 必须独立阅读代码、对照需求并运行验证。",
+      "weight": 10
+    },
+    {
+      "source": "claim:verification-must-be-independent",
+      "target": "concept:independent-reviewer",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:verification-must-be-independent",
+      "target": "concept:verification-before-completion",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:verification-must-be-independent",
+      "target": "concept:human-gatekeeper",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "claim:tests-and-root-cause-prevent-shortcuts",
+      "type": "makes",
+      "reason": "TDD 和根因调查是对抗 agent 走捷径的硬约束：没有失败测试不写生产代码，没有根因不做修复。",
+      "weight": 7
+    },
+    {
+      "source": "claim:tests-and-root-cause-prevent-shortcuts",
+      "target": "concept:test-driven-development",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:tests-and-root-cause-prevent-shortcuts",
+      "target": "concept:root-cause-investigation",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:tests-and-root-cause-prevent-shortcuts",
+      "target": "concept:coding-agent",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "claim:fresh-context-improves-agent-work",
+      "type": "makes",
+      "reason": "为不同任务使用 fresh subagent 可以减少上下文污染，让执行和 review 更接近独立判断。",
+      "weight": 7
+    },
+    {
+      "source": "claim:fresh-context-improves-agent-work",
+      "target": "concept:fresh-subagent",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:fresh-context-improves-agent-work",
+      "target": "concept:context-control",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:fresh-context-improves-agent-work",
+      "target": "concept:independent-reviewer",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "claim:escalation-is-part-of-quality-control",
+      "type": "makes",
+      "reason": "当 agent 缺少上下文、无法判断方案或陷入无效探索时，停止并升级比继续产出不确定结果更符合工程质量。",
+      "weight": 7
+    },
+    {
+      "source": "claim:escalation-is-part-of-quality-control",
+      "target": "concept:stop-and-escalate",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:escalation-is-part-of-quality-control",
+      "target": "concept:human-gatekeeper",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "claim:escalation-is-part-of-quality-control",
+      "target": "concept:coding-agent",
+      "type": "uses_concept",
+      "reason": "这个判断依赖该概念",
+      "weight": 5
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "keyword:superpowers",
+      "type": "has_keyword",
+      "reason": "Superpowers",
+      "weight": 1
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "keyword:coding-agent",
+      "type": "has_keyword",
+      "reason": "coding agent",
+      "weight": 1
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "keyword:agent-管理",
+      "type": "has_keyword",
+      "reason": "agent 管理",
+      "weight": 1
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "keyword:技能系统",
+      "type": "has_keyword",
+      "reason": "技能系统",
+      "weight": 1
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "keyword:tdd",
+      "type": "has_keyword",
+      "reason": "TDD",
+      "weight": 1
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "keyword:根因调查",
+      "type": "has_keyword",
+      "reason": "根因调查",
+      "weight": 1
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "keyword:独立-review",
+      "type": "has_keyword",
+      "reason": "独立 review",
+      "weight": 1
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "keyword:完成前验证",
+      "type": "has_keyword",
+      "reason": "完成前验证",
+      "weight": 1
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "keyword:fresh-subagent",
+      "type": "has_keyword",
+      "reason": "fresh subagent",
+      "weight": 1
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "keyword:上下文污染",
+      "type": "has_keyword",
+      "reason": "上下文污染",
+      "weight": 1
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "keyword:停止并升级",
+      "type": "has_keyword",
+      "reason": "停止并升级",
+      "weight": 1
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "keyword:人类守门人",
+      "type": "has_keyword",
+      "reason": "人类守门人",
+      "weight": 1
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "keyword:工程纪律",
+      "type": "has_keyword",
+      "reason": "工程纪律",
+      "weight": 1
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "keyword:ai-编程",
+      "type": "has_keyword",
+      "reason": "AI 编程",
+      "weight": 1
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "topic:coding-agent-management",
+      "type": "summarizes",
+      "reason": "文章整体围绕如何管理 coding agent 展开。",
+      "weight": 4
+    },
+    {
+      "source": "article:superpowers-management",
+      "target": "claim:agent-needs-management-not-trust",
+      "type": "summarizes",
+      "reason": "这是全文的中心判断。",
+      "weight": 4
+    },
+    {
+      "source": "claim:agent-needs-management-not-trust",
+      "target": "concept:poor-taste-junior-engineer",
+      "type": "depends_on",
+      "reason": "文章用初级工程师模型解释为什么 agent 需要被管理。",
+      "weight": 4
+    },
+    {
+      "source": "concept:poor-taste-junior-engineer",
+      "target": "concept:coding-agent",
+      "type": "applies_to",
+      "reason": "该模型用于描述 coding agent 的能力和缺陷。",
+      "weight": 4
+    },
+    {
+      "source": "claim:skills-externalize-discipline",
+      "target": "concept:skill-system",
+      "type": "depends_on",
+      "reason": "该主张建立在 Skill 系统能固化流程约束的前提上。",
+      "weight": 4
+    },
+    {
+      "source": "concept:superpowers",
+      "target": "concept:skill-system",
+      "type": "supports",
+      "reason": "Superpowers 通过技能文件承载任务流程和约束。",
+      "weight": 4
+    },
+    {
+      "source": "claim:tests-and-root-cause-prevent-shortcuts",
+      "target": "concept:test-driven-development",
+      "type": "depends_on",
+      "reason": "TDD 是该主张中的核心约束之一。",
+      "weight": 4
+    },
+    {
+      "source": "claim:tests-and-root-cause-prevent-shortcuts",
+      "target": "concept:root-cause-investigation",
+      "type": "depends_on",
+      "reason": "根因调查是该主张中的另一个核心约束。",
+      "weight": 4
+    },
+    {
+      "source": "claim:verification-must-be-independent",
+      "target": "concept:independent-reviewer",
+      "type": "depends_on",
+      "reason": "独立 reviewer 是实现独立验证的角色机制。",
+      "weight": 4
+    },
+    {
+      "source": "claim:verification-must-be-independent",
+      "target": "concept:verification-before-completion",
+      "type": "supports",
+      "reason": "独立 review 强化完成前必须验证的原则。",
+      "weight": 4
+    },
+    {
+      "source": "concept:verification-before-completion",
+      "target": "concept:human-gatekeeper",
+      "type": "supports",
+      "reason": "验证证据帮助人类守门人做最终判断。",
+      "weight": 4
+    },
+    {
+      "source": "claim:fresh-context-improves-agent-work",
+      "target": "concept:fresh-subagent",
+      "type": "depends_on",
+      "reason": "fresh subagent 是减少上下文污染的具体手段。",
+      "weight": 4
+    },
+    {
+      "source": "concept:fresh-subagent",
+      "target": "topic:context-control",
+      "type": "applies_to",
+      "reason": "fresh subagent 属于上下文治理策略。",
+      "weight": 4
+    },
+    {
+      "source": "claim:fresh-context-improves-agent-work",
+      "target": "claim:verification-must-be-independent",
+      "type": "supports",
+      "reason": "干净上下文能增强 review 的独立性。",
+      "weight": 4
+    },
+    {
+      "source": "claim:escalation-is-part-of-quality-control",
+      "target": "concept:stop-and-escalate",
+      "type": "depends_on",
+      "reason": "停止并升级是该质量控制主张的操作机制。",
+      "weight": 4
+    },
+    {
+      "source": "concept:stop-and-escalate",
+      "target": "concept:human-gatekeeper",
+      "type": "supports",
+      "reason": "升级把不确定判断交回给人。",
+      "weight": 4
+    },
+    {
+      "source": "concept:management-pipeline",
+      "target": "topic:process-discipline",
+      "type": "applies_to",
+      "reason": "分阶段流水线把流程纪律落实到任务推进中。",
+      "weight": 4
+    },
+    {
+      "source": "concept:management-pipeline",
+      "target": "concept:superpowers",
+      "type": "example_of",
+      "reason": "文章把 Superpowers 呈现为管理流水线的具体例子。",
+      "weight": 4
+    },
+    {
+      "source": "topic:human-judgment",
+      "target": "concept:human-gatekeeper",
+      "type": "related_to",
+      "reason": "人的判断责任体现为最终守门角色。",
+      "weight": 4
+    },
+    {
+      "source": "article:claude-code-eggs",
+      "target": "article:claude-code-false-claims",
+      "type": "precedes",
+      "reason": "源码彩蛋文章提供 Claude Code 内部机制材料，False Claim 文章进一步抽象为工程化防御机制。",
+      "weight": 8
+    },
+    {
+      "source": "article:claude-code-false-claims",
+      "target": "article:superpowers-management",
+      "type": "extends",
+      "reason": "前者讨论 Claude Code 在 harness 内补偿模型弱点，后者讨论 Superpowers 在 harness 外用管理流程补偿 agent 弱点。",
+      "weight": 9
+    },
+    {
+      "source": "claim:false-claim-is-core-risk",
+      "target": "claim:agent-needs-management-not-trust",
+      "type": "supports",
+      "reason": "Agent 会误报完成，因此它不能被默认信任，必须进入管理和验收流程。",
+      "weight": 9
+    },
+    {
+      "source": "concept:independent-verification",
+      "target": "concept:verification-before-completion",
+      "type": "related_to",
+      "reason": "两者都强调完成声明必须基于实际验证证据。",
+      "weight": 8
+    },
+    {
+      "source": "concept:subagent-verifier",
+      "target": "concept:independent-reviewer",
+      "type": "related_to",
+      "reason": "Claude Code 的 verifier agent 和 Superpowers 的独立 reviewer 都把实现者和裁判拆开。",
+      "weight": 8
+    },
+    {
+      "source": "concept:permission-system",
+      "target": "concept:human-gatekeeper",
+      "type": "supports",
+      "reason": "权限系统和人类守门人共同解决 agent 行动边界问题。",
+      "weight": 7
+    },
+    {
+      "source": "concept:agentic-coding",
+      "target": "concept:coding-agent",
+      "type": "related_to",
+      "reason": "Agentic Coding 是范式，coding agent 是这个范式里的执行主体。",
+      "weight": 7
+    },
+    {
+      "source": "topic:claude-code",
+      "target": "topic:coding-agent-management",
+      "type": "contrasts_with",
+      "reason": "Claude Code 代表产品内建的补偿机制，coding agent management 代表用户侧流程治理。",
+      "weight": 7
+    }
+  ]
+}
