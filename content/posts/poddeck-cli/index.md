@@ -24,7 +24,10 @@ AI生成本身不是问题。问题是大部分用AI写文章的人，**自己�
 
 所以做了**PodDeck**——把几十期2-3小时的长播客，自动转成20-30页可翻的deck，扔在GitHub Pages上。
 
-地址：[kvenux.github.io/poddeck](https://kvenux.github.io/poddeck/)。不知道从哪开始，就先翻这几张：
+**PodDeck地址**：[kvenux.github.io/poddeck](https://kvenux.github.io/poddeck/)
+**源码**：[github.com/kvenux/poddeck](https://github.com/kvenux/poddeck)
+
+不知道从哪开始，就先翻这几张：
 
 - [姚顺宇 — 在Anthropic和Gemini训模型](https://kvenux.github.io/poddeck/episodes/Gk_KUg3qED0/)——做AI不要很聪明，本科生都能做，靠谱就行
 - [Dario Amodei — "我们已经接近指数曲线的尾声"](https://kvenux.github.io/poddeck/episodes/n1E9IZfvGMA/)——A社CEO亲口说：scaling的红利在见顶
@@ -82,7 +85,7 @@ slidev build slides.md --base /poddeck/episodes/<id>/
 
 Claude Code这个产品本身也是同一个机制。它真正赢的地方不是模型更聪明，是它**活在一个接口已经为它准备好的世界里**——terminal、git、npm、kubectl、ffmpeg、grep、jq、make，全是字符进字符出、副作用可观测、错误码标准化。这套接口最早是为"会grep的人"设计的，今天发现它对LLM也是最低摩擦。
 
-反观大部分SaaS的"AI战略"——在GUI里塞一个chatbox。方向是反的。GUI是给眼睛和手做的，把眼睛和手抠掉以后剩下的是空的。真正能让AI干活的地方，是产品本身就有一个干净的CLI。
+反观大部分SaaS的"AI战略"——在GUI里塞一个chatbox。方向是反的。GUI是给眼睛和手做的，真正能让AI干活的地方，是产品本身就有一个干净的CLI。
 
 ## AI时代不是新时代，是字符接口时代被重新放大
 
@@ -95,9 +98,3 @@ Claude Code这个产品本身也是同一个机制。它真正赢的地方不是
 PodDeck这件事我能用周末几小时碎片搭出来，功劳不在我，也不在模型。是`yt-dlp`的维护者、`gh`的团队、Slidev的作者，过去这些年一直按Unix哲学做事，**不小心把AI时代的接口提前交付了**。
 
 开源社区从来不是为AI准备的。但他们一直在做的事——单一职责、文本输入输出、错误码标准化、文档塞进`--help`——刚好就是AI友好。
-
----
-
-**PodDeck**：[kvenux.github.io/poddeck](https://kvenux.github.io/poddeck/)
-
-**源码**：[github.com/kvenux/poddeck](https://github.com/kvenux/poddeck)
