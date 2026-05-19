@@ -12,11 +12,11 @@ slug: "poddeck-cli"
 
 直接原因是公众号、头条号那种内容**本质上都是AI生成的，缺乏观点**。
 
-AI生成本身不是问题。问题是大部分用AI写文章的人，**自己其实不知道要表达什么观点**——脑子里没有一个想清楚的主张，扔给AI润色一遍、加几段铺垫，文字流畅、结构齐整，自己读着也觉得挺好——但通篇没有一个立得住的观点。他被AI绑架了，处在一种"不知道自己不知道"的状态。
+AI生成本身不是问题。问题是大部分用AI写文章的人，**自己其实不知道要表达什么观点**——脑子里没有一个想清楚的主张，扔给AI润色一遍、加几段铺垫，文字流畅、结构齐整，自己读着也觉得挺好——但通篇没有一个立得住的观点。这类文章的特点是被AI绑架了，处在一种"不知道自己不知道"的状态。
 
 这种内容堆在我的信息流里，对认知没有任何帮助。它有信息的体积，没有信息的密度。读完不会改变我对任何问题的看法，因为它本来就没主张要改变什么。
 
-所以我现在主动追的就三类源：Twitter上大佬本人的原话、长访谈类播客（Lex Fridman、Dwarkesh、Lenny's、Huberman、张小珺），技术博客原文。这一层每个人都是带着自己的观点在说话——一期Lex对Karpathy、一期Dwarkesh对Dario，里头随便挑一段都有公众号永远抓不到的反直觉判断、具体案例、嘉宾自己都讲不清但反复在用的心智模型。
+所以我现在主动追的就三类源：Twitter上大佬本人的原话（比如Karpathy）、长访谈类播客（Lex Fridman、Dwarkesh、Lenny's、Huberman、张小珺），技术博客原文。这一层每个人都是带着自己的观点在说话——一期Lex对Karpathy、一期Dwarkesh对Dario，里头随便挑一段都有公众号永远抓不到的反直觉判断、具体案例、嘉宾自己都讲不清但反复在用的心智模型。
 
 但这套信息流有个明显的瓶颈：**播客太长**。每期两到三小时是常态。我下班、带娃、做饭，听不完。攒在收藏夹里吃灰比没收藏更焦虑——你知道好东西在那里，但你拿不到。
 
@@ -26,6 +26,7 @@ AI生成本身不是问题。问题是大部分用AI写文章的人，**自己�
 
 地址：[kvenux.github.io/poddeck](https://kvenux.github.io/poddeck/)。不知道从哪开始，就先翻这几张：
 
+- [姚顺宇 — 在Anthropic和Gemini训模型](https://kvenux.github.io/poddeck/episodes/Gk_KUg3qED0/)——做AI不要很聪明，本科生都能做，靠谱就行
 - [Dario Amodei — "We are near the end of the exponential"](https://kvenux.github.io/poddeck/episodes/n1E9IZfvGMA/)——A社CEO：AI算力指数曲线已经接近尾声
 - [Boris Cherny — Head of Claude Code](https://kvenux.github.io/poddeck/episodes/We7BZVKbCVw/)——CC作者：AI coding已经解题，公司里大部分人开始用CC干编码以外的事
 - [Jensen Huang — Will Nvidia's moat persist?](https://kvenux.github.io/poddeck/episodes/Hrbq66XqtCo/)——老黄：跟台积电从来不签合同，60个人直接汇报，不搞1:1
