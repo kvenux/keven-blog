@@ -23,11 +23,11 @@ AI生成本身不是问题。问题是大部分用AI写文章的人，**自己�
 地址：[kvenux.github.io/poddeck](https://kvenux.github.io/poddeck/)。不知道从哪开始，就先翻这几张：
 
 - [姚顺宇 — 在Anthropic和Gemini训模型](https://kvenux.github.io/poddeck/episodes/Gk_KUg3qED0/)——做AI不要很聪明，本科生都能做，靠谱就行
-- [Dario Amodei — "We are near the end of the exponential"](https://kvenux.github.io/poddeck/episodes/n1E9IZfvGMA/)——A社CEO：AI算力指数曲线已经接近尾声
-- [Boris Cherny — Head of Claude Code](https://kvenux.github.io/poddeck/episodes/We7BZVKbCVw/)——CC作者：AI coding已经解题，公司里大部分人开始用CC干编码以外的事
-- [Jensen Huang — Will Nvidia's moat persist?](https://kvenux.github.io/poddeck/episodes/Hrbq66XqtCo/)——老黄：跟台积电从来不签合同，60个人直接汇报，不搞1:1
-- [Andrej Karpathy — From Vibe Coding to Agentic Engineering](https://kvenux.github.io/poddeck/episodes/96jN2OCOfLs/)——vibe coding之后，工程的真正形态是什么
-- [Terence Tao — How the world's top mathematician uses AI](https://kvenux.github.io/poddeck/episodes/Q8Fkpi18QXU/)——顶级数学家把AI当协作工具的具体方式
+- [Dario Amodei — "我们已经接近指数曲线的尾声"](https://kvenux.github.io/poddeck/episodes/n1E9IZfvGMA/)——A社CEO亲口说：scaling的红利在见顶
+- [Boris Cherny — Claude Code负责人](https://kvenux.github.io/poddeck/episodes/We7BZVKbCVw/)——CC作者：AI coding已经解题，公司里大部分人开始用CC干编码以外的事
+- [Jensen Huang — 英伟达的护城河还能保住吗？](https://kvenux.github.io/poddeck/episodes/Hrbq66XqtCo/)——老黄：跟台积电从来不签合同，60个人直接汇报，不搞1:1
+- [Andrej Karpathy — 从vibe coding到agentic engineering](https://kvenux.github.io/poddeck/episodes/96jN2OCOfLs/)——vibe coding之后，工程的真正形态是什么
+- [Terence Tao — 全世界最顶尖的数学家怎么用AI](https://kvenux.github.io/poddeck/episodes/Q8Fkpi18QXU/)——顶级数学家把AI当协作工具的具体方式
 
 整个东西是一个**周末带娃的间隙**搞出来的——零零散散几个小时的碎片，从我问"有没有下字幕的cli"，到能发朋友圈的版本部署上线。我没敲过一条命令，也没写过一行代码。
 
