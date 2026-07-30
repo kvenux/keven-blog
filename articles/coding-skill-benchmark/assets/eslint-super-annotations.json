@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "description": "Manually reviewed high-level ESLint Superpowers annotations.",
+  "annotations": [
+    {"thread_id":"019f949d-5caf-7791-8bff-f434a71ce3cc","start_step":1,"end_step":18,"kind":"plan","label":"brainstorming · 补齐产品契约","status":"neutral","source":"manual","evidence":["steps 1-18"]},
+    {"thread_id":"019f949d-5caf-7791-8bff-f434a71ce3cc","start_step":19,"end_step":42,"kind":"plan","label":"design → writing-plans","status":"neutral","source":"manual","evidence":["steps 19-42"]},
+    {"thread_id":"019f949d-5caf-7791-8bff-f434a71ce3cc","start_step":43,"end_step":60,"kind":"plan","label":"准备sub-agent执行","status":"neutral","source":"manual","evidence":["steps 43-60"]},
+    {"thread_id":"019f949d-5caf-7791-8bff-f434a71ce3cc","start_step":61,"end_step":109,"kind":"implement","label":"sub-agent实现与等待","status":"pass","source":"manual","evidence":["steps 61-109"]},
+    {"thread_id":"019f949d-5caf-7791-8bff-f434a71ce3cc","start_step":110,"end_step":129,"kind":"review","label":"两轮review与整合","status":"pass","source":"manual","evidence":["steps 110-129"]},
+    {"thread_id":"019f949d-5caf-7791-8bff-f434a71ce3cc","start_step":130,"end_step":142,"kind":"verify","label":"最终验证与完成","status":"pass","source":"manual","evidence":["steps 130-142"]},
+    {"thread_id":"019f94a9-d5dd-74b2-a707-56e014bd6312","start_step":1,"end_step":15,"kind":"verify","label":"建立失败测试","status":"neutral","source":"manual","evidence":["steps 1-15"]},
+    {"thread_id":"019f94a9-d5dd-74b2-a707-56e014bd6312","start_step":16,"end_step":42,"kind":"implement","label":"实现与迭代","status":"pass","source":"manual","evidence":["steps 16-42"]},
+    {"thread_id":"019f94a9-d5dd-74b2-a707-56e014bd6312","start_step":43,"end_step":56,"kind":"verify","label":"验证并提交","status":"pass","source":"manual","evidence":["steps 43-56"]},
+    {"thread_id":"019f94b8-0c64-7590-a1d6-98786a37a737","start_step":1,"end_step":5,"kind":"review","label":"spec compliance review","status":"pass","source":"manual","evidence":["steps 1-5"]},
+    {"thread_id":"019f94b9-c1a4-72b2-914b-88ea112e6593","start_step":1,"end_step":9,"kind":"review","label":"final review","status":"pass","source":"manual","evidence":["steps 1-9"]}
+  ]
+}

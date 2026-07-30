@@ -1,0 +1,811 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Bare、Grill Me、OpenSpec、Ponytail、Superpowers与MatrixSpec在八个真实代码任务上的质量、隐藏验收、Token成本与trajectory对照。">
+  <title>给Agent装Skill，真的会更强吗？六套能力包、144次独立运行</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17211b;
+      --muted: #667269;
+      --paper: #f5f2e9;
+      --card: #fffdf7;
+      --line: #d9d4c7;
+      --green: #145c43;
+      --green-soft: #e7f1ea;
+      --red: #a23a2b;
+      --red-soft: #f8e8e2;
+      --gold: #916812;
+      --code: #17231d;
+      --shadow: 0 18px 60px rgba(43, 50, 43, .10);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 2%, rgba(20, 92, 67, .09), transparent 28rem),
+        radial-gradient(circle at 92% 7%, rgba(162, 58, 43, .08), transparent 25rem),
+        var(--paper);
+      font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif;
+      font-size: 18px;
+      line-height: 1.86;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: var(--green); text-underline-offset: 3px; }
+    .hero {
+      padding: 72px 24px 54px;
+      border-bottom: 1px solid var(--line);
+    }
+    .hero-inner, main { width: min(920px, calc(100% - 40px)); margin: 0 auto; }
+    .eyebrow {
+      margin-bottom: 14px;
+      color: var(--red);
+      font: 700 13px/1.4 "Segoe UI", "Microsoft YaHei", sans-serif;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: 820px;
+      margin: 0;
+      font-size: clamp(38px, 6.3vw, 68px);
+      line-height: 1.12;
+      letter-spacing: -.035em;
+    }
+    .dek { max-width: 760px; margin: 24px 0 0; color: #465149; font-size: 20px; line-height: 1.72; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 34px;
+    }
+    .stat {
+      padding: 17px 18px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 253, 247, .72);
+    }
+    .stat strong { display: block; font: 800 25px/1.25 "Segoe UI", "Microsoft YaHei", sans-serif; }
+    .stat span { color: var(--muted); font: 13px/1.5 "Segoe UI", "Microsoft YaHei", sans-serif; }
+    main {
+      margin-top: 42px;
+      margin-bottom: 84px;
+      padding: 42px clamp(20px, 5vw, 68px) 68px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+    main > p:first-child::first-letter {
+      float: left;
+      margin: .08em .12em 0 0;
+      color: var(--green);
+      font-size: 4.2em;
+      font-weight: 800;
+      line-height: .82;
+    }
+    h2 {
+      margin: 2.6em 0 .85em;
+      padding-top: .25em;
+      color: #122b20;
+      font-size: clamp(27px, 4vw, 38px);
+      line-height: 1.3;
+      letter-spacing: -.02em;
+    }
+    h2::before { content: ""; display: block; width: 42px; height: 4px; margin-bottom: 14px; background: var(--red); }
+    h3 {
+      margin: 2.25em 0 .75em;
+      color: #173f2e;
+      font-size: clamp(22px, 3vw, 29px);
+      line-height: 1.4;
+    }
+    h4 {
+      margin: 1.9em 0 .65em;
+      color: #7e3529;
+      font: 700 20px/1.5 "Segoe UI", "Microsoft YaHei", sans-serif;
+    }
+    p { margin: 1.05em 0; }
+    strong { color: #102b20; }
+    blockquote {
+      margin: 2em 0;
+      padding: 20px 24px;
+      border-left: 5px solid var(--green);
+      background: var(--green-soft);
+      font-size: 1.16em;
+    }
+    blockquote p { margin: 0; }
+    pre {
+      overflow-x: auto;
+      margin: 1.7em 0;
+      padding: 20px 22px;
+      border-radius: 12px;
+      color: #eef8f1;
+      background: var(--code);
+      font: 14px/1.7 "Cascadia Code", Consolas, monospace;
+    }
+    code {
+      padding: .12em .34em;
+      border-radius: 4px;
+      color: #8b2f24;
+      background: #f0e9dc;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: .88em;
+    }
+    pre code { padding: 0; color: inherit; background: transparent; }
+    ul, ol { padding-left: 1.35em; }
+    li { margin: .45em 0; }
+    .table-wrap {
+      overflow-x: auto;
+      margin: 1.8em -12px;
+      padding: 0 12px 8px;
+    }
+    table {
+      width: 100%;
+      min-width: 680px;
+      border-spacing: 0;
+      border-collapse: separate;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    th, td { padding: 11px 12px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th:last-child, td:last-child { border-right: 0; }
+    tr:last-child td { border-bottom: 0; }
+    th { position: sticky; top: 0; color: #f7faf8; background: var(--green); font-weight: 700; white-space: nowrap; }
+    tbody tr:nth-child(even) { background: #f8f6ef; }
+    figure { margin: 2.3em calc(50% - 46vw); text-align: center; }
+    figure a { display: inline-block; max-width: min(1200px, 92vw); }
+    figure img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      max-height: 82vh;
+      margin: 0 auto;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 10px 35px rgba(34, 44, 37, .11);
+    }
+    figcaption { max-width: 860px; margin: 10px auto 0; color: var(--muted); font: 13px/1.55 "Segoe UI", "Microsoft YaHei", sans-serif; }
+    hr { margin: 3.2em 0; border: 0; border-top: 1px solid var(--line); }
+    @media (max-width: 720px) {
+      body { font-size: 16px; }
+      .hero { padding-top: 48px; }
+      .stats { grid-template-columns: 1fr; }
+      main { width: calc(100% - 20px); margin-top: 18px; padding: 28px 18px 50px; border-radius: 12px; }
+      figure { margin-left: -8px; margin-right: -8px; }
+      .table-wrap { margin-left: -18px; margin-right: -18px; }
+    }
+    @media print {
+      body { background: #fff; }
+      .hero { padding-top: 24px; }
+      main { width: 100%; margin: 0; border: 0; box-shadow: none; }
+      figure { margin-left: 0; margin-right: 0; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">AI Coding · 工作流评测 · 2026</div>
+      <h1>给Agent装Skill，真的会更强吗？六套能力包、144次独立运行</h1>
+      <p class="dek">Bare、Grill Me、OpenSpec、Ponytail、Superpowers与MatrixSpec在八个真实代码任务上的质量、隐藏验收、Token成本与trajectory对照。</p>
+      <div class="stats" aria-label="核心实验数字">
+        <div class="stat"><strong>8 × 6 × 3</strong><span>任务 × 被测Agent × 独立重复</span></div>
+        <div class="stat"><strong>144条轨迹</strong><span>冻结diff、隐藏测试与处理标签盲化评分</span></div>
+        <div class="stat"><strong>−2.12到+16.73</strong><span>不同能力包相对Bare的均分变化</span></div>
+      </div>
+    </div>
+  </header>
+  <main>
+<p>最近一段时间，Coding Agent的能力包越来越像一门生意。</p>
+<p>有的要求先brainstorming，再写spec、plan、测试和review；有的强调<strong>少写代码、尽快交付</strong>；有的把开发过程变成状态机；也有的只做一件事：在动手前，把需求问清楚。</p>
+<p>这些项目通常都能讲出一套完整的方法论。问题是，<strong>方法论完整，不等于Agent真的变强。</strong>模型原本就会读代码、写测试和自我检查。再装一套Skill，新增的到底是有效信息，还是重复流程？</p>
+<p>我把Bare、Grill Me、OpenSpec、Ponytail、Superpowers和MatrixSpec放进同一组八任务面板。每个task×arm运行3次，共144条正式轨迹。所有候选都从冻结commit开始，最终diff交给两名不知道处理标签的judge评分，并运行候选不可见的隐藏测试。</p>
+<p>先说结论：</p>
+<ul>
+<li><strong>没有一套能力包在所有任务上通吃。</strong>同一个Skill可以在一项任务上明显提高质量，在另一项任务上制造额外噪声。</li>
+<li><strong>Grill Me确实有用，但收益来自向operator购买缺失的产品信息。</strong>需求已经完整时，它的优势迅速缩小。</li>
+<li><strong>Ponytail确实让代码变少，却没有让开发过程更便宜。</strong>八项任务新增代码平均减少20.5%，Candidate Token反而增加44.5%，均分下降1.31。</li>
+<li><strong>重型工作流能提高平均分，也可能吞掉数量级更多的Token。</strong>Superpowers比Bare高10.54分，Token约为Bare的10倍；它不是无效，而是没有建立稳定的质量—成本关系。</li>
+<li><strong>MatrixSpec L0用确认artifact保存跨阶段决策，避免下一阶段继承整段对话。</strong>它把需求、设计决定和验收边界交给下一阶段，在当前面板上以8.57M Token获得90.27分；这一结果仍受operator协议和事后选arm影响。</li>
+<li><strong>真正决定Skill价值的，不是它包含多少步骤，而是它修正了哪种不确定性。</strong></li>
+</ul>
+<figure><a href="./assets/hero-skill-value.png" target="_blank" rel="noopener"><img loading="lazy" src="./assets/hero-skill-value.png" alt="六套能力包通过需求信息、跨阶段决策和验收证据压缩不确定性，并形成不同的质量与流程成本" /></a><figcaption>六套能力包通过需求信息、跨阶段决策和验收证据压缩不确定性，并形成不同的质量与流程成本</figcaption></figure>
+<p>这篇文章不再逐个介绍项目功能。我更关心一个底层问题：</p>
+<blockquote>
+<p><strong>六套工作流本质上都在购买三样东西：需求信息、经过确认的跨阶段决策和验收证据。工作流的价值取决于它买到了什么，以及为此付出了多少Token。</strong></p>
+</blockquote>
+<h2 id="section">六套能力包，实际改变了什么</h2>
+<p>先把名字背后的机制说清楚。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>被测Agent</th>
+<th>主要机制</th>
+<th>它试图修正的问题</th>
+<th>主要成本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bare（裸Agent）</td>
+<td>不加载额外能力包，模型直接调查、实现和测试</td>
+<td>不额外假设流程缺陷</td>
+<td>依赖模型与仓库自身能力</td>
+</tr>
+<tr>
+<td>Grill Me</td>
+<td>逐问澄清，确认共享理解后再实现</td>
+<td>仓库外的产品决定缺失</td>
+<td>operator交互与问题数量</td>
+</tr>
+<tr>
+<td>OpenSpec core</td>
+<td>先建立规格artifact，再执行变更</td>
+<td>需求到实现之间状态丢失</td>
+<td>写作、同步与维护spec</td>
+</tr>
+<tr>
+<td>Ponytail full</td>
+<td>最小diff、复用现有机制、YAGNI</td>
+<td>过度工程和无关改动</td>
+<td>更多搜索与范围判断</td>
+</tr>
+<tr>
+<td>Superpowers Full</td>
+<td>brainstorming→spec→plan→sub-agent→review→verification</td>
+<td>跳步、遗漏和不稳定执行</td>
+<td>长上下文、多会话与调度</td>
+</tr>
+<tr>
+<td>MatrixSpec L0</td>
+<td>用确认artifact传递阶段状态、受限review、不预生成全量基线文档</td>
+<td>关键决策在阶段交接时丢失</td>
+<td>operator审计与阶段成本</td>
+</tr>
+</tbody>
+</table></div>
+<p>这里的Bare可以直接理解为<strong>裸Agent</strong>：使用同一个强模型、同一套CLI工具、仓库规则和测试环境，只是不加载额外Skill或workflow。它照样会读代码、修改文件、运行测试和检查结果，并不是一个“什么都不会”的弱基线。<strong>任何能力包新增的质量，都必须和这个裸Agent比较；新增的Token、Tool Call和等待成本也必须一起计算。</strong></p>
+<p>Grill Me也不是一个普通的“多问几句”。它明确区分两类信息：仓库里能查到的事实由Agent自己调查；需要人决定的产品语义交给用户。它一次问一个问题，并给出推荐答案，直到双方确认共享理解。这个设计很轻，却直接触及Agent最难独立解决的变量：<strong>代码库里根本不存在的产品决定。</strong></p>
+<p>Ponytail走向另一个方向。它要求在每次响应中保持激活，优先交付最短可工作的diff，复杂需求也倾向先采用合理默认。这套规则确实能压缩代码，但它隐含了一个待验证的等式：</p>
+<blockquote>
+<p><strong>更少代码≈更少成本≈更高可靠性。</strong></p>
+</blockquote>
+<p>后面的数据会表明，这三个量并不等价。</p>
+<h2 id="section-1">实验设计</h2>
+<h3 id="section-2">实验目标与研究问题</h3>
+<p>实验目标不是给GitHub项目排一个总榜，而是回答四个问题：</p>
+<ul>
+<li><strong>RQ1：</strong>六套能力包相对Bare，在质量、可靠性和Token成本上表现如何？</li>
+<li><strong>RQ2：</strong>Grill Me为什么在部分任务上有效，它买到的到底是什么？</li>
+<li><strong>RQ3：</strong>Ponytail减少代码之后，是否真的减少成本、提高正确性？</li>
+<li><strong>RQ4：</strong>什么样的不确定性，值得调用什么样的Skill机制？</li>
+</ul>
+<h3 id="section-3">八个任务</h3>
+<p>任务覆盖Go、JavaScript、Python和Rust，包含低歧义局部修改，也包含公共API、安全解析器和标准协议。它们不是八道独立算法题，而是八个冻结开源仓库上的PR级改动。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>任务</th>
+<th>仓库与来源</th>
+<th>需求摘要</th>
+<th>主要不确定性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CLI item-list fields</td>
+<td><a href="https://github.com/cli/cli">cli/cli</a>，关联<a href="https://github.com/cli/cli/pull/13823">PR #13823</a></td>
+<td>为project item-list增加按字段名/ID展示列，处理flag冲突、分页、类型渲染和错误语义</td>
+<td>高需求歧义</td>
+</tr>
+<tr>
+<td>ESLint caught error</td>
+<td><a href="https://github.com/eslint/eslint">eslint/eslint</a></td>
+<td>扩展preserve-caught-error，使自定义错误类可配置，并保持schema、类型和兼容行为一致</td>
+<td>需求枚举</td>
+</tr>
+<tr>
+<td>pytest plugin entry points</td>
+<td><a href="https://github.com/pytest-dev/pytest">pytest-dev/pytest</a></td>
+<td>让插件加载复用现有entry-point路径并覆盖环境变量和pytest_plugins</td>
+<td>低歧义负对照</td>
+</tr>
+<tr>
+<td>pytest addini expressions</td>
+<td><a href="https://github.com/pytest-dev/pytest">pytest-dev/pytest</a></td>
+<td>为addini加入类型表达式，处理解析、兼容、类型与文档</td>
+<td>中等契约</td>
+</tr>
+<tr>
+<td>bat sanitize</td>
+<td><a href="https://github.com/sharkdp/bat">sharkdp/bat</a></td>
+<td>增加控制序列清洗，覆盖CLI/API、7-bit ESC、8-bit C1和不完整序列</td>
+<td>安全敏感parser</td>
+</tr>
+<tr>
+<td>SQLModel constraints</td>
+<td><a href="https://github.com/fastapi/sqlmodel">fastapi/sqlmodel</a>，<a href="https://github.com/fastapi/sqlmodel/pull/681">PR #681</a></td>
+<td>协调Field约束、sentinel语义、SQLAlchemy列推导和公共类型</td>
+<td>公共API兼容</td>
+</tr>
+<tr>
+<td>Axum executor</td>
+<td><a href="https://github.com/tokio-rs/axum">tokio-rs/axum</a>，<a href="https://github.com/tokio-rs/axum/pull/3704">PR #3704</a></td>
+<td>为serve引入自定义executor，贯穿trait、HTTP/2和builder组合</td>
+<td>跨模块公共API</td>
+</tr>
+<tr>
+<td>Prometheus UTF-8</td>
+<td><a href="https://github.com/prometheus/client_python">prometheus/client_python</a>，<a href="https://github.com/prometheus/client_python/pull/1102">PR #1102</a></td>
+<td>实现四种escaping、版本协商、fallback及多个导出入口</td>
+<td>高隐藏协议契约</td>
+</tr>
+</tbody>
+</table></div>
+<p>没有公开PR链接的任务，以冻结仓库commit、任务合同和独立参考实现为来源，并不伪装成真实已合并PR。完整commit与验收命令放在文末方法附录。</p>
+<h3 id="section-4">标准答案、交互与评分</h3>
+<figure><a href="./assets/experiment-protocol.png" target="_blank" rel="noopener"><img loading="lazy" src="./assets/experiment-protocol.png" alt="实验从八个冻结任务经过psmux受控交互、证据冻结、隐藏验收和处理标签盲化评分形成144条正式轨迹" /></a><figcaption>实验从八个冻结任务经过psmux受控交互、证据冻结、隐藏验收和处理标签盲化评分形成144条正式轨迹</figcaption></figure>
+<p>每个任务都包含四层独立材料：</p>
+<ul>
+<li><strong>任务提示：</strong>被测Agent能看到的初始需求。</li>
+<li><strong>Ground Truth合同：</strong>产品语义、边界条件和参考决策，候选不可见。</li>
+<li><strong>参考实现与隐藏测试：</strong>用于校验合同是否可执行，不向被测Agent暴露。</li>
+<li><strong>评分rubric：</strong>把正确性、兼容性、测试、文档与实现质量拆成可审计条目。</li>
+</ul>
+<p>交互式workflow由<code>psmux</code>驱动。被测Agent本身运行在无头CLI里；<code>psmux</code>负责识别提问、把预先定义的operator回答送回会话，并记录每次往返。这里的operator模拟知道产品真实意图的开发者，它可以回答“应该支持哪些边界”，但不能把隐藏测试内容直接泄露给候选。</p>
+<p>MatrixSpec的operator还会检查阶段artifact是否完整记录Ground Truth；Superpowers和Grill Me主要由Agent主动提问。这是一个真实的treatment差异，也意味着它们获得oracle信息的协议并不完全对称。正文不会把这种差异藏起来。</p>
+<p>评分分两步：先冻结产品diff、Git状态、测试输出、过程日志和Token账本；再将匿名候选交给两名judge独立评分。judge不知道候选使用了哪套能力包。隐藏测试单独运行，报告“整套通过”的run数。<strong>流程完成、单元测试变绿和隐藏验收通过是三个不同概念。</strong></p>
+<h3 id="section-5">公平性约束</h3>
+<ul>
+<li>同一任务的所有arm从同一baseline commit开始，网络关闭，仓库remote移除。</li>
+<li>使用同一模型、reasoning配置、CLI工具和运行时依赖。</li>
+<li>Ground Truth、参考实现、rubric和隐藏测试对候选不可见。</li>
+<li>失败、超时和未完成运行原样计入，不补跑替换。</li>
+<li>每个候选由两名处理标签盲化judge评分。</li>
+<li>每个task×arm均为3次独立运行，任务均值再做八任务<strong>等权平均</strong>。</li>
+</ul>
+<p>需要强调：144条核心轨迹来自多个冻结campaign的统一面板汇总，并非一次同时随机化完成的单批实验。CLI、ESLint和部分pytest过程指标使用同题历史对照。它们支持任务内描述与机制分析，<strong>不支持把一两分差异解释为统计显著优势。</strong></p>
+<h2 id="rq1skill">RQ1：装上Skill，整体更强了吗</h2>
+<p><strong>RA1：有些工作流提高了当前面板的平均质量，但没有一套能力包形成跨任务、跨指标的稳定支配。Skill的收益高度依赖任务中的主导不确定性。</strong></p>
+<h3 id="section-6">总结果</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>被测Agent</th>
+<th style="text-align: right;">八任务等权平均</th>
+<th style="text-align: right;">Candidate Token/run</th>
+<th style="text-align: right;">时长/run</th>
+<th style="text-align: right;">Candidate+operator成本/run</th>
+<th>相对Bare判断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bare</td>
+<td style="text-align: right;">73.54</td>
+<td style="text-align: right;"><strong>2.22M</strong></td>
+<td style="text-align: right;"><strong>8.14 min</strong></td>
+<td style="text-align: right;"><strong>$1.08</strong></td>
+<td>基线</td>
+</tr>
+<tr>
+<td>Grill Me</td>
+<td style="text-align: right;">80.30</td>
+<td style="text-align: right;">3.31M</td>
+<td style="text-align: right;">13.45 min</td>
+<td style="text-align: right;">$2.55</td>
+<td>+6.76分，Token 1.49×</td>
+</tr>
+<tr>
+<td>OpenSpec core</td>
+<td style="text-align: right;">71.42</td>
+<td style="text-align: right;">3.91M</td>
+<td style="text-align: right;">13.07 min</td>
+<td style="text-align: right;">$1.68</td>
+<td>−2.12分，Token 1.76×</td>
+</tr>
+<tr>
+<td>Ponytail full</td>
+<td style="text-align: right;">72.23</td>
+<td style="text-align: right;">3.21M</td>
+<td style="text-align: right;">11.33 min</td>
+<td style="text-align: right;">$1.42</td>
+<td>−1.31分，Token 1.45×</td>
+</tr>
+<tr>
+<td>Superpowers Full</td>
+<td style="text-align: right;">84.08</td>
+<td style="text-align: right;">23.44M</td>
+<td style="text-align: right;">58.41 min</td>
+<td style="text-align: right;">$9.65</td>
+<td>+10.54分，Token约10×</td>
+</tr>
+<tr>
+<td>MatrixSpec L0</td>
+<td style="text-align: right;"><strong>90.27</strong></td>
+<td style="text-align: right;">8.57M</td>
+<td style="text-align: right;">33.41 min</td>
+<td style="text-align: right;">$4.71</td>
+<td>探索性复合对照</td>
+</tr>
+</tbody>
+</table></div>
+<figure><a href="./assets/quality-token-frontier-matplotlib.png" target="_blank" rel="noopener"><img loading="lazy" src="./assets/quality-token-frontier-matplotlib.png" alt="六套能力包的八任务盲评分与Candidate Token二维关系" /></a><figcaption>六套能力包的八任务盲评分与Candidate Token二维关系</figcaption></figure>
+<p>这张图给出三个直接判断：</p>
+<ul>
+<li><strong>Bare仍然是非常强的成本基线。</strong>任何通用Skill都必须解释为什么值得增加调用、上下文和等待。</li>
+<li><strong>Grill Me位于较合理的增量区间。</strong>它没有买下完整开发流程，却拿到了明显的平均分提升。</li>
+<li><strong>Superpowers买到了质量，也支付了数量级更高的Token。</strong>问题不在于它“完全没用”，而在于10倍成本没有形成可预测的10倍收益。</li>
+</ul>
+<p>MatrixSpec L0在当前面板上分数最高、Token低于Superpowers，但不能把它宣布为总冠军。它是我参与开发的系统；L0是在内部2×2结果后选出的代表arm，operator的artifact审计也更主动，尚未经过独立held-out任务验证。更重要的是，L0整套隐藏测试通过13/24，低于Superpowers的16/24。<strong>连续盲评分、精确隐藏验收和成本给出了不同排序。</strong></p>
+<figure><a href="./assets/score-tools-token-three-metrics-matplotlib.png" target="_blank" rel="noopener"><img loading="lazy" src="./assets/score-tools-token-three-metrics-matplotlib.png" alt="六套能力包的盲评分、Tool Call轮次与Candidate Token对比" /></a><figcaption>六套能力包的盲评分、Tool Call轮次与Candidate Token对比</figcaption></figure>
+<p>把资源指标拆开后，工作流膨胀的路径更加清楚。Bare平均每次运行只有29.2次Tool Call；Grill Me、OpenSpec和Ponytail集中在38.2—44.3次；MatrixSpec L0为123.0次；Superpowers达到157.4次。<strong>Token上涨不只是单次上下文变长，也来自更多工具调用、更多会话和更长的执行链。</strong></p>
+<h3 id="section-7">完整任务矩阵</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>被测Agent</th>
+<th style="text-align: right;">CLI</th>
+<th style="text-align: right;">ESLint</th>
+<th style="text-align: right;">pytest plugin</th>
+<th style="text-align: right;">pytest addini</th>
+<th style="text-align: right;">bat</th>
+<th style="text-align: right;">SQLModel</th>
+<th style="text-align: right;">Axum</th>
+<th style="text-align: right;">Prometheus</th>
+<th style="text-align: right;">等权平均</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bare</td>
+<td style="text-align: right;">79.67</td>
+<td style="text-align: right;">54.83</td>
+<td style="text-align: right;"><strong>95.00</strong></td>
+<td style="text-align: right;">79.00</td>
+<td style="text-align: right;">85.67</td>
+<td style="text-align: right;">85.00</td>
+<td style="text-align: right;">72.83</td>
+<td style="text-align: right;">36.33</td>
+<td style="text-align: right;">73.54</td>
+</tr>
+<tr>
+<td>Grill Me</td>
+<td style="text-align: right;">97.67</td>
+<td style="text-align: right;">99.20</td>
+<td style="text-align: right;">93.83</td>
+<td style="text-align: right;"><strong>92.83</strong></td>
+<td style="text-align: right;">68.50</td>
+<td style="text-align: right;">81.67</td>
+<td style="text-align: right;">81.00</td>
+<td style="text-align: right;">27.67</td>
+<td style="text-align: right;">80.30</td>
+</tr>
+<tr>
+<td>OpenSpec</td>
+<td style="text-align: right;">81.17</td>
+<td style="text-align: right;">54.33</td>
+<td style="text-align: right;">90.00</td>
+<td style="text-align: right;">78.67</td>
+<td style="text-align: right;">91.17</td>
+<td style="text-align: right;">73.50</td>
+<td style="text-align: right;">71.17</td>
+<td style="text-align: right;">31.33</td>
+<td style="text-align: right;">71.42</td>
+</tr>
+<tr>
+<td>Ponytail</td>
+<td style="text-align: right;">80.50</td>
+<td style="text-align: right;">51.00</td>
+<td style="text-align: right;">90.50</td>
+<td style="text-align: right;">77.33</td>
+<td style="text-align: right;"><strong>92.83</strong></td>
+<td style="text-align: right;">79.17</td>
+<td style="text-align: right;">67.17</td>
+<td style="text-align: right;">39.33</td>
+<td style="text-align: right;">72.23</td>
+</tr>
+<tr>
+<td>Superpowers</td>
+<td style="text-align: right;"><strong>100.00</strong></td>
+<td style="text-align: right;">98.17</td>
+<td style="text-align: right;">91.33</td>
+<td style="text-align: right;">89.33</td>
+<td style="text-align: right;">85.00</td>
+<td style="text-align: right;"><strong>85.67</strong></td>
+<td style="text-align: right;">80.50</td>
+<td style="text-align: right;">42.67</td>
+<td style="text-align: right;">84.08</td>
+</tr>
+<tr>
+<td>MatrixSpec L0</td>
+<td style="text-align: right;">99.83</td>
+<td style="text-align: right;"><strong>100.00</strong></td>
+<td style="text-align: right;">93.33</td>
+<td style="text-align: right;">85.50</td>
+<td style="text-align: right;">86.83</td>
+<td style="text-align: right;">85.33</td>
+<td style="text-align: right;"><strong>91.50</strong></td>
+<td style="text-align: right;"><strong>79.83</strong></td>
+<td style="text-align: right;"><strong>90.27</strong></td>
+</tr>
+</tbody>
+</table></div>
+<figure><a href="./assets/task-arm-delta-heatmap-matplotlib.png" target="_blank" rel="noopener"><img loading="lazy" src="./assets/task-arm-delta-heatmap-matplotlib.png" alt="五套能力包在八个任务上相对Bare的评分变化：同一个workflow会随任务发生明显反转" /></a><figcaption>五套能力包在八个任务上相对Bare的评分变化：同一个workflow会随任务发生明显反转</figcaption></figure>
+<p>表格解释比总平均更重要：</p>
+<ul>
+<li>Grill Me在CLI、ESLint和pytest addini上大幅提高，在bat和Prometheus上反而明显下降。</li>
+<li>Ponytail在bat拿到全表最高分之一，在Axum和SQLModel上退化。</li>
+<li>Superpowers在CLI和ESLint接近满分，在简单pytest与bat上没有超过Bare。</li>
+<li>Prometheus让所有方案暴露了协议恢复能力的上限；15条非MatrixSpec运行没有一条整套隐藏测试通过。</li>
+</ul>
+<p><strong>同一个workflow跨任务反转，说明任务类型不是背景变量，而是决定ROI的核心变量。</strong></p>
+<h2 id="rq2grill-me">RQ2：Grill Me为什么有用</h2>
+<p><strong>RA2：Grill Me的主要价值不是让Agent“思考更久”，而是建立了一条获取仓库外产品决定的通道。它对需求缺口敏感，对代码复杂度并不敏感。</strong></p>
+<p>Grill Me八任务均分80.30，比Bare高6.76分，只增加约1.09M Candidate Token/run。这个ROI明显好于固定全流程，但平均数仍然掩盖了边界。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>任务</th>
+<th style="text-align: right;">Bare</th>
+<th style="text-align: right;">Grill Me</th>
+<th style="text-align: right;">分差</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CLI</td>
+<td style="text-align: right;">79.67</td>
+<td style="text-align: right;">97.67</td>
+<td style="text-align: right;">+18.00</td>
+<td>补齐flag、错误和渲染语义</td>
+</tr>
+<tr>
+<td>ESLint</td>
+<td style="text-align: right;">54.83</td>
+<td style="text-align: right;">99.20</td>
+<td style="text-align: right;">+44.37</td>
+<td>把配置schema与兼容边界问完整</td>
+</tr>
+<tr>
+<td>pytest plugin</td>
+<td style="text-align: right;">95.00</td>
+<td style="text-align: right;">93.83</td>
+<td style="text-align: right;">−1.17</td>
+<td>需求已经短而明确</td>
+</tr>
+<tr>
+<td>pytest addini</td>
+<td style="text-align: right;">79.00</td>
+<td style="text-align: right;">92.83</td>
+<td style="text-align: right;">+13.83</td>
+<td>类型表达式存在产品选择</td>
+</tr>
+<tr>
+<td>bat</td>
+<td style="text-align: right;">85.67</td>
+<td style="text-align: right;">68.50</td>
+<td style="text-align: right;">−17.17</td>
+<td>问题多不等于获得正确parser契约</td>
+</tr>
+<tr>
+<td>Prometheus</td>
+<td style="text-align: right;">36.33</td>
+<td style="text-align: right;">27.67</td>
+<td style="text-align: right;">−8.66</td>
+<td>operator信息仍不足以覆盖完整标准</td>
+</tr>
+</tbody>
+</table></div>
+<figure><a href="./assets/grill-questions-score-delta-matplotlib.png" target="_blank" rel="noopener"><img loading="lazy" src="./assets/grill-questions-score-delta-matplotlib.png" alt="Grill Me每次运行的平均operator问题数与相对Bare评分变化：问题数量没有形成单调收益" /></a><figcaption>Grill Me每次运行的平均operator问题数与相对Bare评分变化：问题数量没有形成单调收益</figcaption></figure>
+<p>八个任务没有呈现“问得越多，收益越高”的关系。ESLint平均提出25.33个问题并提高44.37分，因为这些回答补齐了产品合同；bat与Prometheus各提出约7个问题，评分仍然下降。<strong>交互成本买到的是问题的答案，真正产生收益的是答案中新增的有效信息。</strong></p>
+<h3 id="eslint">案例：ESLint的四条路径</h3>
+<p>这项任务要求给<code>preserve-caught-error</code>增加<code>errorClassNames</code>配置。真正困难的不是写一个数组，而是确定字符串与对象形式、参数位置、内置错误类覆盖、无效schema、直接调用和兼容边界。</p>
+<figure><a href="./assets/eslint-grill-vs-terse-bare-tool.png" target="_blank" rel="noopener"><img loading="lazy" src="./assets/eslint-grill-vs-terse-bare-tool.png" alt="ESLint简略Bare与Grill Me的等尺trajectory：ROOT上方标明被测arm，蓝色cell表示询问operator或等待评审" /></a><figcaption>ESLint简略Bare与Grill Me的等尺trajectory：ROOT上方标明被测arm，蓝色cell表示询问operator或等待评审</figcaption></figure>
+<p>第一张图先比较缺少合同的两条路径。每个cell代表一个解析后的step，ROOT上方标明被测arm，蓝色cell表示Agent向operator提问或提交评审。Grill Me为70步，简略Bare为28步；两行使用完全相同的cell宽度，因此长度差不是绘图拉伸造成的。Grill Me新增的过程主要用于逐项澄清和继续调查。</p>
+<figure><a href="./assets/eslint-superpowers-tree-tool.png" target="_blank" rel="noopener"><img loading="lazy" src="./assets/eslint-superpowers-tree-tool.png" alt="ESLint Superpowers的Return-aware session tree与详细Bare对照：ROOT标明SUPERPOWERS，蓝色cell表示operator交互" /></a><figcaption>ESLint Superpowers的Return-aware session tree与详细Bare对照：ROOT标明SUPERPOWERS，蓝色cell表示operator交互</figcaption></figure>
+<p>第二张图把Superpowers的主Agent、实现sub-agent、spec compliance reviewer和final reviewer放回同一坐标系。蓝色实线是Spawn，紫色虚线是Return；详细Bare是独立对照，不连接到session tree。四条路径的结果可以直接对照：</p>
+<ul>
+<li><strong>简略Bare：</strong>28步、0.98M Token、50分。它很快实现了自己理解的需求，但产品契约没有进入上下文。</li>
+<li><strong>详细Bare：</strong>36步、1.56M Token、100分。完整需求从一开始就存在，模型直接实现并验证。</li>
+<li><strong>Grill Me：</strong>70步、3.84M Token、18个operator问题、97.5分。它用交互逐项购买缺失信息。</li>
+<li><strong>Superpowers：</strong>212步、14.86M Token、4个会话、100分。它也拿到了契约，同时支付spec、plan、sub-agent和review的完整流程成本。</li>
+</ul>
+<p>四条路径的共同成功因素不是“步骤多”，而是<strong>完整产品契约进入了实现上下文</strong>。Grill Me在这里有效，因为它能改变信息集合；详细Bare证明，只要同样的信息提前给到模型，重型流程并非必要条件。</p>
+<p>这也给Grill Me划出边界：</p>
+<ul>
+<li>operator必须真的知道答案；不知道时，反复提问不会创造oracle。</li>
+<li>一次只问一个问题能降低认知负担，也会拉长交互；ESLint三次运行分别产生18、22和36个问题。</li>
+<li>提问中的“推荐答案”有助于推进，也可能形成锚定。</li>
+<li>低歧义任务没有足够的信息增益来覆盖交互成本。</li>
+</ul>
+<p>所以Grill Me适合作为<strong>需求歧义触发器</strong>，不适合作为所有任务的强制开场。</p>
+<h2 id="rq3ponytail">RQ3：Ponytail真的更省吗</h2>
+<p><strong>RA3：Ponytail稳定压缩了产品diff，却没有稳定压缩Agent的搜索、验证和推理过程。它是实现范围的正则器，不是端到端成本优化器。</strong></p>
+<p>Ponytail的触发没有问题。八项任务里，它在8/8都减少了新增代码，平均减少20.5%。如果只看diff，这套方法论兑现了自己的承诺。</p>
+<p>但把其余指标放回去，故事完全不同：</p>
+<ul>
+<li>7/8任务使用了更多Candidate Token，整体增加44.5%。</li>
+<li>工具调用增加30.6%，墙钟时间增加39.2%。</li>
+<li>5/8任务得分下降，八任务均分从73.54降到72.23。</li>
+<li>只有bat同时形成了明确的质量与交付成功。</li>
+</ul>
+<figure><a href="./assets/ponytail-evidence-matplotlib.png" target="_blank" rel="noopener"><img loading="lazy" src="./assets/ponytail-evidence-matplotlib.png" alt="Ponytail相对Bare的总体指标与逐任务证据：代码稳定减少，Token、时间和正确性没有同步改善" /></a><figcaption>Ponytail相对Bare的总体指标与逐任务证据：代码稳定减少，Token、时间和正确性没有同步改善</figcaption></figure>
+<p>左图把Bare归一为100：新增代码降至79.5，Candidate Token却升至144.5，工具调用和墙钟时间也同步上升。右图中所有任务都位于横轴左侧，说明代码确实更少；评分却分散在零线上下，说明<strong>少写代码没有稳定预测正确性</strong>。Prometheus的气泡最大：新增代码减少33.1%，Token升至2.23倍，三次隐藏测试仍全部失败。</p>
+<p>为什么代码更少，过程反而更贵？因为Ponytail减少的是最终产物，不是找到最小实现的搜索成本。Agent会读取更多文件、比较更多复用点、反复判断哪一层最适合落改动，再做局部验证。<strong>最小diff本身也需要计算。</strong></p>
+<h3 id="abat">案例A：bat，范围控制变成了真实收益</h3>
+<p>bat需要清除终端控制序列。简单说，它要识别ANSI颜色、光标控制和设备控制等不可见指令，只保留用户真正想看的文本，同时不能破坏UTF-8字符或CLI/API行为。</p>
+<p>这个仓库已有成熟的终端解析与渲染机制。Ponytail的“先复用、少造抽象、保持小diff”与任务结构一致：平均分从85.67升到92.83，三次隐藏测试全部通过，新增代码减少7.8%。它仍多用了21%Token，但换来了可观察的质量与稳定性提升。</p>
+<figure><a href="./assets/bat-ponytail-vs-bare-tool.png" target="_blank" rel="noopener"><img loading="lazy" src="./assets/bat-ponytail-vs-bare-tool.png" alt="bat代表运行的等尺trajectory：ROOT标明PONYTAIL及主Agent阶段，Ponytail 84步，Bare 49步" /></a><figcaption>bat代表运行的等尺trajectory：ROOT标明PONYTAIL及主Agent阶段，Ponytail 84步，Bare 49步</figcaption></figure>
+<p>图中Ponytail的84步明显长于Bare的49步。这个案例的收益来自更充分地复用正确机制并覆盖边界，<strong>不是因为过程更短。</strong></p>
+<h3 id="bprometheus">案例B：Prometheus，更小的实现没有恢复协议</h3>
+<p>Prometheus任务要求支持四种escaping方案、版本协商、fallback、direct generator API以及多个导出入口。这些不是从局部代码风格就能推导出的合理默认，而是一份公开协议的精确合同。</p>
+<p>Ponytail把新增代码减少33.1%，代表运行却从Bare的36步、2.48M Token扩展到66步、5.10M Token。两边三次隐藏测试都没有整套通过。更短的实现没有恢复缺失的版本门槛、escaping边界和集成语义。</p>
+<figure><a href="./assets/prometheus-ponytail-vs-bare-tool.png" target="_blank" rel="noopener"><img loading="lazy" src="./assets/prometheus-ponytail-vs-bare-tool.png" alt="Prometheus代表运行的等尺trajectory：ROOT标明PONYTAIL及主Agent阶段，Ponytail 66步，Bare 36步" /></a><figcaption>Prometheus代表运行的等尺trajectory：ROOT标明PONYTAIL及主Agent阶段，Ponytail 66步，Bare 36步</figcaption></figure>
+<p>两张工具图使用同一套视觉语法，却指向两个不同结论：</p>
+<ul>
+<li>bat的最小实现能够复用仓库里已经存在的正确机制，<strong>压缩的是冗余。</strong></li>
+<li>Prometheus的最小实现面对不完整协议，<strong>压缩掉的可能正是必要契约与验证。</strong></li>
+</ul>
+<p>因此，Ponytail不是“没用”。它适合需求明确、仓库已有正确抽象、隐藏政策少、focused tests充分的实现收尾。把它升级成通用开发方法，才会把“更少代码”错误地扩张成“更高效率”。</p>
+<h2 id="rq4skill">RQ4：应该按什么选择Skill</h2>
+<p><strong>RA4：Skill不该按“是否写代码”触发，而应按尚未解决的不确定性触发。选择机制之前，先说清楚它要新增哪一种信息或证据，以及何时停止。</strong></p>
+<p>前面的结果可以统一到一个判断框架：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>主导不确定性</th>
+<th>最小有效机制</th>
+<th>继续条件</th>
+<th>停止条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>需求不清</td>
+<td>按需澄清、确认产品合同</td>
+<td>仍存在影响实现的产品决定</td>
+<td>剩余问题可从仓库验证</td>
+</tr>
+<tr>
+<td>实现风险</td>
+<td>一次定向review</td>
+<td>公共API、并发、安全、兼容边界未覆盖</td>
+<td>已知风险有测试或证据</td>
+</tr>
+<tr>
+<td>跨阶段决策丢失</td>
+<td>最小spec/决策账本</td>
+<td>下一阶段仍需重新猜测需求或设计理由</td>
+<td>关键决定、未决问题和验收边界均可直接执行</td>
+</tr>
+<tr>
+<td>验收不明</td>
+<td>focused tests、隐藏验收、fresh verification</td>
+<td>失败证据仍未解释</td>
+<td>目标行为有可复现证据</td>
+</tr>
+<tr>
+<td>过度实现</td>
+<td>最小diff与YAGNI约束</td>
+<td>正确性已知但范围继续膨胀</td>
+<td>无多余修改且验收完整</td>
+</tr>
+</tbody>
+</table></div>
+<figure><a href="./assets/skill-routing.png" target="_blank" rel="noopener"><img loading="lazy" src="./assets/skill-routing.png" alt="Skill按照需求、实现、跨阶段决策、验收和实现范围五类不确定性路由，并为每种机制设置停止条件" /></a><figcaption>Skill按照需求、实现、跨阶段决策、验收和实现范围五类不确定性路由，并为每种机制设置停止条件</figcaption></figure>
+<h3 id="matrixspec">MatrixSpec的优势：让决策跨阶段存活</h3>
+<p>长任务最容易丢失的是<strong>代码背后的决定</strong>。需求阶段已经确认的兼容边界、被排除的方案和验收条件，如果只存在于对话历史里，到了实现、review或新Agent接手时，就必须重新读取、重新推理，甚至重新猜测。上下文还在，不代表共享理解还在；这就是跨阶段决策丢失。</p>
+<p>MatrixSpec把proposal、delta spec和tasks作为经过确认的阶段状态。一个阶段内部继续使用同一thread，跨阶段时旋转thread；下一阶段只读取已经确认的需求、决定和未决项，不继承前一个Agent完整的探索过程。review也只围绕确认文档、当前diff和测试证据展开，不再为每个任务动态派发一组sub-agent。<strong>artifact在这里承担长对话的有损压缩：丢掉中间自述，保留会影响实现和验收的事实。</strong></p>
+<p>六个可对齐任务的session账本提供了一个有辨识度的现象：MatrixSpec L0平均有20.0个session文件，Superpowers为10.2个；但前者仅消耗8.07M Token/run，后者为20.44M。差距主要出现在缓存输入回放：7.41M对19.65M；Tool Call则为120.1对161.2。<strong>会话数量更多，Token反而更少。真正决定成本的是每个新阶段需要重新携带多少历史。</strong></p>
+<p>这组数据不能单独证明阶段旋转产生了全部差异。MatrixSpec同时改变了operator审计、文档结构、review方式和运行控制，L0也没有经过独立held-out验证。但它至少揭示了一个值得保留的设计方向：<strong>跨阶段交接需要传递经过确认的状态，不需要继承全部思考过程。</strong>这也是MatrixSpec相对固定长流程最重要的机制优势。</p>
+<p>这个框架也解释了六套能力包为什么会反转：</p>
+<ul>
+<li>Grill Me在“需求不清”时补充新信息；需求清楚后只剩交互成本。</li>
+<li>Ponytail在“实现范围膨胀”时压缩冗余；协议不清时无法替代合同。</li>
+<li>OpenSpec在跨阶段决策确实需要交接时有价值；局部任务里，artifact可能只是第二份上下文。</li>
+<li>Superpowers把多个有效原语装进固定流水线，覆盖面广，却容易为不存在的风险付费。</li>
+<li>MatrixSpec L0用确认artifact保存跨阶段决策，同时限制review和全量文档；当前结果支持这一机制继续验证，但还不足以给出普遍优越性结论。</li>
+</ul>
+<h3 id="section-8">从能力包到机制包</h3>
+<p>Skill框架最容易犯的错误，是把一套曾经有效的工作方法变成默认身份：安装之后，Agent无论遇到什么任务，都先证明自己遵循了流程。</p>
+<p>但软件工程不是动作清单。它是对不确定性的管理。需求澄清、spec、TDD、review和sub-agent都只是工具；它们只有在改变信息、状态或证据时才产生价值。</p>
+<p>一个可持续的Skill至少应该满足四个条件：</p>
+<ul>
+<li><strong>有触发条件。</strong>说明它针对什么失败模式，而不是“任何编码任务都必须使用”。</li>
+<li><strong>有信息增益。</strong>每一轮要引入新需求、新失败证据或新外部事实。</li>
+<li><strong>有停止条件。</strong>没有新信息时停止提问、Spawn和review，不把流程完成度当质量代理。</li>
+<li><strong>有成本账本。</strong>Token、墙钟、operator负担和sub-agent上下文都应进入ROI，而不是只统计最终代码。</li>
+</ul>
+<p>模型能力还会继续增强。凡是只把“模型过去不太会做的普通步骤”写成Skill，最终都可能被基础模型吞噬。能长期留下来的，不是更详细的操作说明，而是模型无法从当前上下文独立获得的东西：<strong>组织特有的产品合同、可执行验收、外部反馈、风险边界和跨阶段真实状态。</strong></p>
+<p>这也是这组实验最重要的结论。</p>
+<p>Skill真正的价值，不是让Agent看起来更像一个守流程的工程师。<strong>它应该让Agent接触到原本无法获得的信息，并用尽可能小的机制把不确定性压下去。</strong></p>
+<p>如果一轮流程没有改变Agent知道什么、相信什么或能证明什么，它再专业，也只是更贵的原地踏步。</p>
+<hr />
+<h2 id="section-9">方法附录</h2>
+<h3 id="section-10">聚合与指标</h3>
+<p>研究单位是一次独立候选运行。每条运行先对两名judge评分取平均，再对同一task×arm的3次运行取均值，最后对八个任务等权平均。<code>Candidate Token/run</code>统计被测Agent完整session tree的已记录Token；成本包含candidate与operator，不包含统一judge成本。美元是API-equivalent估算，不是订阅账单。</p>
+<p>时长来自campaign记录的实现阶段。不同历史campaign的计时边界存在差异，因此时长只用于数量级描述，不用于小差异排名。</p>
+<h3 id="section-11">任务快照与公开来源</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>任务</th>
+<th>冻结commit</th>
+<th>公开PR/来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cli-item-list-fields</td>
+<td><code>ae66a1c02e08</code></td>
+<td><a href="https://github.com/cli/cli">cli/cli</a>，关联<a href="https://github.com/cli/cli/pull/13823">PR #13823</a></td>
+</tr>
+<tr>
+<td>eslint-preserve-caught-error</td>
+<td><code>c30d80801ca5</code></td>
+<td><a href="https://github.com/eslint/eslint">eslint/eslint</a>，内部冻结任务</td>
+</tr>
+<tr>
+<td>pytest-plugin-entry-points</td>
+<td><code>f1211ba21d1d</code></td>
+<td><a href="https://github.com/pytest-dev/pytest">pytest-dev/pytest</a>，内部冻结任务</td>
+</tr>
+<tr>
+<td>pytest-addini-type-expressions</td>
+<td><code>ef052d0bc481</code></td>
+<td><a href="https://github.com/pytest-dev/pytest">pytest-dev/pytest</a>，内部冻结任务</td>
+</tr>
+<tr>
+<td>bat-sanitize</td>
+<td><code>971f9679dafa</code></td>
+<td><a href="https://github.com/sharkdp/bat">sharkdp/bat</a>，内部冻结任务</td>
+</tr>
+<tr>
+<td>sqlmodel-field-constraints</td>
+<td><code>e4e1385eedc7</code></td>
+<td><a href="https://github.com/fastapi/sqlmodel/pull/681">PR #681</a></td>
+</tr>
+<tr>
+<td>axum-custom-executor</td>
+<td><code>309d1bd9530e</code></td>
+<td><a href="https://github.com/tokio-rs/axum/pull/3704">PR #3704</a></td>
+</tr>
+<tr>
+<td>prometheus-utf8-negotiation</td>
+<td><code>d24220a6c477</code></td>
+<td><a href="https://github.com/prometheus/client_python/pull/1102">PR #1102</a></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-12">证据边界</h3>
+<ul>
+<li>每个正式单元<code>n=3</code>，支持任务级描述，不支持细小差值的显著性推断。</li>
+<li>核心矩阵汇总自多个冻结campaign，不是一次单批随机试验。</li>
+<li>trajectory案例用于解释过程机制，不能代替组件级随机消融。</li>
+<li>Ponytail的代码增减按冻结产品diff统计，Token按candidate session统计，两者量纲不同。</li>
+<li>MatrixSpec是作者参与开发的系统，L0为事后选取arm，operator协议不同，缺少held-out验证。</li>
+<li>任务面板偏向开源库中的局部PR级修改，不覆盖长周期绿地设计、大规模迁移和真实团队交接。</li>
+</ul>
+<h3 id="section-13">可复核材料</h3>
+<p>本地实验仓库中的主要证据包括：</p>
+<ul>
+<li><code>reports/capability-task-score-matrix.md</code>：完整能力×任务矩阵与来源。</li>
+<li><code>reports/capability-task-economics.csv</code>：逐任务分数、时长、Token和成本。</li>
+<li><code>reports/ponytail-deep-analysis.md</code>：Ponytail的diff、工具调用与逐任务证据。</li>
+<li><code>reports/agentic-coding-workflows-technical-manuscript.md</code>：实验协议、Superpowers消融与证据边界。</li>
+<li><code>.scratch/trajectory-recon/*.json</code>：从原始rollout重建的本文代表trajectory。</li>
+</ul>
+
+  </main>
+</body>
+</html>

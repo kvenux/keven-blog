@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "description": "Manually reviewed high-level ESLint Grill Me annotations.",
+  "annotations": [
+    {"thread_id":"019f94ba-3cfe-7f03-98c2-0eb141669893","start_step":1,"end_step":5,"kind":"explore","label":"加载Grill Me与仓库调查","status":"neutral","source":"manual","evidence":["steps 1-5"]},
+    {"thread_id":"019f94ba-3cfe-7f03-98c2-0eb141669893","start_step":6,"end_step":23,"kind":"plan","label":"18轮operator澄清产品契约","status":"pass","source":"manual","evidence":["steps 6-23"]},
+    {"thread_id":"019f94ba-3cfe-7f03-98c2-0eb141669893","start_step":24,"end_step":35,"kind":"implement","label":"实现规则、schema与测试","status":"pass","source":"manual","evidence":["steps 24-35"]},
+    {"thread_id":"019f94ba-3cfe-7f03-98c2-0eb141669893","start_step":36,"end_step":54,"kind":"verify","label":"聚焦测试与边界修复","status":"pass","source":"manual","evidence":["steps 36-54"]},
+    {"thread_id":"019f94ba-3cfe-7f03-98c2-0eb141669893","start_step":55,"end_step":70,"kind":"verify","label":"完整验证与产物收口","status":"pass","source":"manual","evidence":["steps 55-70"]}
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "description": "Manually reviewed high-level bat Ponytail annotations.",
+  "annotations": [
+    {"thread_id":"019f9a12-d3e0-7442-9e7f-f9929c15b761","start_step":1,"end_step":11,"kind":"explore","label":"加载Ponytail并追踪渲染路径","status":"neutral","source":"manual","evidence":["steps 1-11"]},
+    {"thread_id":"019f9a12-d3e0-7442-9e7f-f9929c15b761","start_step":12,"end_step":21,"kind":"implement","label":"实现共享sanitizer与配置","status":"pass","source":"manual","evidence":["steps 12-21"]},
+    {"thread_id":"019f9a12-d3e0-7442-9e7f-f9929c15b761","start_step":22,"end_step":53,"kind":"verify","label":"编译、等待与测试迭代","status":"neutral","source":"manual","evidence":["steps 22-53"]},
+    {"thread_id":"019f9a12-d3e0-7442-9e7f-f9929c15b761","start_step":54,"end_step":77,"kind":"verify","label":"修复帮助文本与集成验证","status":"pass","source":"manual","evidence":["steps 54-77"]},
+    {"thread_id":"019f9a12-d3e0-7442-9e7f-f9929c15b761","start_step":78,"end_step":84,"kind":"conclude","label":"全量回归与结论","status":"pass","source":"manual","evidence":["steps 78-84"]}
+  ]
+}

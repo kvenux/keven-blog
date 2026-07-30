@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "description": "Manually reviewed high-level Prometheus Ponytail annotations.",
+  "annotations": [
+    {"thread_id":"019f9d3f-fac7-75a3-92ac-85b2c375f120","start_step":1,"end_step":12,"kind":"explore","label":"加载Ponytail并追踪协议路径","status":"neutral","source":"manual","evidence":["steps 1-12"]},
+    {"thread_id":"019f9d3f-fac7-75a3-92ac-85b2c375f120","start_step":13,"end_step":29,"kind":"implement","label":"接入escaping与HTTP协商","status":"pass","source":"manual","evidence":["steps 13-29"]},
+    {"thread_id":"019f9d3f-fac7-75a3-92ac-85b2c375f120","start_step":30,"end_step":48,"kind":"verify","label":"聚焦测试与环境排障","status":"pass","source":"manual","evidence":["steps 30-48"]},
+    {"thread_id":"019f9d3f-fac7-75a3-92ac-85b2c375f120","start_step":49,"end_step":66,"kind":"verify","label":"回归、清理与完成","status":"pass","source":"manual","evidence":["steps 49-66"]}
+  ]
+}
