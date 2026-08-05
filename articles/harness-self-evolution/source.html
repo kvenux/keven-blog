@@ -230,8 +230,7 @@
 </tbody>
 </table></div>
 <p>起点H0用了Bare约五倍的Token，平均分提升不到2%；最终H12相对H0提升约23%，也让24次运行全部走到交付。这个结果来自对固定阶段的持续删除和重组：<strong>自进化让Harness主动交还模型已经具备的能力</strong>。</p>
-<p>这些是固定八任务诊断集上的跨批次描述性结果，只能说明H12在当前诊断集上的表现。它们先给出了演化的终点，却还没有解释最关键的过程：哪些规则被删掉了，哪些信息必须留下，又是谁根据什么证据决定一次修改可以进入下一代。</p>
-<p>如果把“流程变短、分数变高”直接叫作自进化，最难的问题反而被绕开了。优化器可以换一道更简单的题，也可以让评审变宽松，甚至只挑成功轨迹讲故事。判断MatSpec是否真的完成了一次自进化，需要先定义：<strong>Harness改什么</strong>，<strong>证据从哪里来</strong>，<strong>谁有权拒绝它</strong>。</p>
+<p>这些是固定八任务诊断集上的跨批次描述性结果。H12展示了演化终点；接下来要回答的是：哪些规则被删掉，哪些信息留下，以及这些修改如何被同一套外部证据接纳或淘汰。</p>
 <h2 id="harness">什么叫Harness自进化</h2>
 <p>先把概念说清楚。Harness是包围模型、决定一次任务如何发生的那层系统，范围远大于一段系统提示词：</p>
 <ul>
@@ -536,6 +535,7 @@ H1：proposal → delta-spec → tasks → implementation → review
 </tr>
 </tbody>
 </table></div>
+<figure><a href="assets/h12-cross-session-information-routing-whiteboard-v1.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/h12-cross-session-information-routing-whiteboard-v1.png" alt="H12跨会话的信息路由：产品决策保存为delta-spec，仓库事实按需恢复，运行结果针对当前代码重新验证" /></a><figcaption>H12跨会话的信息路由：产品决策保存为delta-spec，仓库事实按需恢复，运行结果针对当前代码重新验证</figcaption></figure>
 <p>规格阶段把原始需求、仓库证据和澄清记录放在一起，反复review和确认，直到会改变实现结果的选择写清，例如默认值何时校验、公开API从哪里导入、旧行为哪些必须保持。实现阶段拿着这份delta-spec开始新会话；源码和测试由它现场探索，已裁决的需求选择无需再猜。</p>
 <h3 id="section-3">最终形态：规格设计与确认 + 实现与验证</h3>
 <p><code>H12</code> 把SDD收敛成两个阶段：</p>
@@ -557,18 +557,15 @@ H1：proposal → delta-spec → tasks → implementation → review
 <p>H12在八个任务上各运行三次，共24条新Candidate trajectory和48次独立盲评；主要成本包含规格Agent与实现Agent，不包含Ground Truth Operator。</p>
 <figure><a href="assets/quality-cost-evolution-matplotlib.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/quality-cost-evolution-matplotlib.png" alt="H0、H1与H12的质量和成本" /></a><figcaption>H0、H1与H12的质量和成本</figcaption></figure>
 <p>图中给出了结果：H12相对H0大幅减少时间、Token和工具调用，24次运行全部完成；相对H1，资源消耗接近减半，平均盲评分略有提高。<strong>H12将预算集中到需求确认和真实验证</strong>。</p>
-<h3 id="section-5">终点仍然有边界</h3>
-<figure><a href="assets/lean-light-task-paired-scores-matplotlib.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/lean-light-task-paired-scores-matplotlib.png" alt="H12与H1的八任务配对分数" /></a><figcaption>H12与H1的八任务配对分数</figcaption></figure>
-<p>任务等权后，H12平均高约2%，但bootstrap区间跨过零，因此<strong>质量优势只算描述性结果</strong>。Prometheus是明确反例：UTF-8名称转义、Accept协商、旧格式兼容和多个导出路径需要同时成立，H12三次运行都未通过聚焦测试。面对这类高耦合需求，仍需要增加定向审查。</p>
-<h2 id="section-6">这次自进化留下了什么</h2>
-<h3 id="harness-1">1. Harness应该优化“决策不确定性”</h3>
+<h2 id="section-5">这次自进化留下了什么</h2>
+<h3 id="harness-1">1. Harness应该优化决策不确定性</h3>
 <p>proposal、design、tasks和review是人类程序员为协作、责任边界、长期审计和异步沟通组织出的先验知识。它描述了人在沟通成本和工作记忆有限时如何推进开发；对AI，特别是经过大量后训练的模型，这套组织方式未必带来额外能力，甚至会重复模型已经内化的规划、拆解、搜索和自检。Harness中的每个外显阶段都需要证明，它补上了模型当前缺少的信息或验证能力。</p>
 <p>如果一个阶段没有澄清新的需求选择，没有发现新的代码或测试证据，也没有产出下一阶段必须使用的交接物，它就应该被怀疑。</p>
 <h3 id="brownfield">2. Brownfield的全量基线要按需使用</h3>
 <p>Brownfield仓库常有一份项目级全量规格和设计基线，记录模块边界、公开接口、历史约束和不能破坏的行为。它对人类程序员很有价值：人不可能一直记住整个仓库，基线能逐步建立并维持心智模型，后续修改时再回头查阅。</p>
 <p>对AI，结论更有条件。H1的有/无全量基线对照里，加入基线只有很小的平均质量收益，却增加了约三成Token，工作流完成率也更低。trajectory进一步显示，Agent读过全量规格后仍会继续读目标源码、测试和Git状态，代码探索没有被稳定替代。现有证据只支持一种窄结论：全量基线在其中恰好含有本次变更所需旧约束时可能有帮助；把它作为每个阶段都必须携带的背景，收益并不稳定。</p>
 <p>H12的做法是把全量基线留在仓库，按需取证；将本次变更已经确认的选择写进delta-spec，跨会话交接；测试、构建和错误输出则针对当前代码重新运行。衡量点是每类信息是否留在最适合它的位置；文档数量本身不构成目的。</p>
-<h3 id="section-7">3. 失败版本是自进化系统的训练数据</h3>
+<h3 id="section-6">3. 失败版本是自进化系统的训练数据</h3>
 <p>上下文切得更碎，Token replay可能下降，但novel work会增加；review保留更多历史，缺陷识别可能更准，但修复闭环仍可能失败。如果只看一个漂亮的Token数，两个失败版本都会被误判为优化。</p>
 <p>所以Harness的选择函数必须同时看质量、完成率、时间、Token、工具调用和真实验证。拒绝记录与接受记录同样重要。</p>
 <h3 id="harness-2">4. 最好的Harness会随模型能力移动</h3>
@@ -579,30 +576,14 @@ H1：proposal → delta-spec → tasks → implementation → review
 <p>对开发者，需求清楚、改动局部时可以直接开发；需求存在歧义或跨越多个系统边界时，先形成经过确认的delta-spec，再让Agent实现并验证。</p>
 <p>对团队Leader，Harness的价值是把个人经验变成可以持续优化的工程能力：从真实历史需求中建立一组小型评测集，用质量、完成率、时间和成本衡量每次工作流修改。模型升级，评测就重跑；有效步骤留下，失去价值的步骤删除。</p>
 <p>没有一套Harness能永久适配所有模型和团队。更可靠的选择，是一套能够被自己仓库里的真实结果持续校准的Harness。</p>
-<h2 id="section-8">结语：真正的闭环在后训练里</h2>
+<h2 id="section-7">结语：真正的闭环在后训练里</h2>
 <p>写到这里，我才更明白开头那种沮丧从哪里来。我站在模型外面优化Harness，<strong>模型团队却在改变模型本身</strong>。任务拆解、TDD、自我检查和长任务执行，过去需要Harness反复提醒；经过大量后训练，它们正在成为模型的默认能力。我刚刚固化下来的一套流程，下一代模型可能已经学会了。</p>
 <p>这种局部优化天然会贬值。可实验里留下的trajectory并没有失去价值：哪些任务做砸了，模型漏掉了什么，Operator如何澄清，哪次review改变了实现，什么测试提供了反证——这些数据既可以修改Harness，也可以进入后训练，直接改变模型下一次处理同类问题的方式。</p>
 <p>从第一性原理看，<strong>Agent的实际能力由模型与Harness共同决定</strong>。后训练塑造模型的默认行为，Harness决定它看到什么、能调用什么、如何得到反馈。两者分开优化，Harness会不断重复模型已经学会的策略，模型也会在一套环境里训练、到另一套环境里工作。<strong>真正的闭环要把它们放进同一个反馈系统</strong>：稳定、通用的工程策略逐渐进入模型权重；变化快、属于具体团队的需求和仓库约束留在Harness；测试、运行环境和评测器持续提供现实反馈。</p>
+<figure><a href="assets/posttraining-harness-coevolution-whiteboard-v1.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/posttraining-harness-coevolution-whiteboard-v1.png" alt="模型后训练与Harness共同演化：真实开发产生轨迹数据，稳定策略进入模型，团队私有约束留在Harness，外部环境持续提供反证" /></a><figcaption>模型后训练与Harness共同演化：真实开发产生轨迹数据，稳定策略进入模型，团队私有约束留在Harness，外部环境持续提供反证</figcaption></figure>
 <p>这也是 <a href="https://www.businessinsider.com/lilian-weng-returns-to-openai-after-leaving-thinking-machines-lab-2026-7">Lilian Weng回到OpenAI</a> 研究递归自我改进让我觉得意味深长的地方。她在文章末尾已经把问题推进到Harness与模型权重的联合优化；回到拥有后训练基础设施、模型权重和真实产品反馈的地方，这条路线才有机会形成完整闭环。与此同时，<a href="https://www.yicai.com/news/103192868.html">DeepSeek也开始从零组建自己的Code Harness团队</a>。前沿实验室的竞争正在从单独训练一个更强的模型，延伸到模型、Harness、数据和评测共同组成的端到端系统。</p>
 <p>所以，Harness Builder的长期价值也要重新定义。工作的重点会转向构造<strong>高质量任务与反馈数据</strong>。这些东西一方面让当前模型可靠交付，另一方面又能反过来推动模型后训练和下一代Harness。</p>
 <p>MatSpec只完成了第一步：删掉已经被模型能力覆盖的流程，把需求决策和外部验证留下来。更远的方向，是<strong>让真实开发进入训练闭环</strong>。到了那时，Harness自进化才不只是工作流自我修改，而是整个Agent系统开始从自己的实践中自我认知的迭代学习。</p>
-<h2 id="section-9">实验材料与复现索引</h2>
-<p>本文图表由冻结JSON报告直接生成，绘图脚本和trajectory选择记录随文章保存：</p>
-<ul>
-<li><code>articles/harness-self-evolution/build-figures.py</code></li>
-<li><code>articles/harness-self-evolution/prepare-trajectories.ps1</code></li>
-<li><code>articles/harness-self-evolution/assets/data/self-evolution-history-bucket-v8-merged-candidate-prompt.md</code></li>
-<li><code>articles/harness-self-evolution/assets/data/self-evolution-history-bucket-v9-diamond-fix-prompt.md</code></li>
-<li><code>articles/harness-self-evolution/assets/data/render-v10-6a-label.ps1</code></li>
-<li><code>articles/harness-self-evolution/assets/data/standard-lean-whiteboard-imagegen-prompt.md</code></li>
-<li><code>articles/harness-self-evolution/assets/data/trajectory-selection.json</code></li>
-<li><code>articles/harness-self-evolution/assets/data/pytest-addini-standard-vs-bare-tree.json</code></li>
-<li><code>sdd-exp/archive/historical-matrixspec/aggregate-reports/matrixspec-profiled-8task-2x2-full-report.json</code></li>
-<li><code>sdd-exp/reports/pytest-delta-spec-bare-v1-analysis.md</code></li>
-<li><code>sdd-exp/reports/matrixspec-light-gpt56-round3-measured-optimization.md</code></li>
-<li><code>sdd-exp/reports/matrixspec-lean-v1-8task.json</code></li>
-</ul>
-<p>本文统一使用H0、H1、H12表示实验版本：H0在实现前增加独立一致性验证，H1删除该阶段，H12是当前版本。产品profile的官方名称与含义以MatSpec README为准；本文不再混用这些名称与实验版本号。</p>
 
   </main>
 </body>
