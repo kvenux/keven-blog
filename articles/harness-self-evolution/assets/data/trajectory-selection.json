@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "selection": "Median reported token run within each pytest-addini arm",
+  "visualizer": "C:\\Users\\kvenu\\playground\\trajtory-visualizer",
+  "note": "The Standard project-level full-specification baseline is generated before candidate turns and is not shown, so the rendered Standard trace understates total Standard work.",
+  "runs": {
+    "standard": {
+      "profile": "Standard",
+      "baselineCondition": "project-level full specification available",
+      "runId": "pa-s1-r1",
+      "status": "failed",
+      "blindScore": 8.5,
+      "reportedTokens": 6610000,
+      "workflow": "Standard with a pre-existing full specification baseline"
+    },
+    "light": {
+      "profile": "Light",
+      "baselineCondition": "no pre-existing project-level full specification",
+      "runId": "pan-l0-r3",
+      "status": "completed",
+      "blindScore": 86.5,
+      "reportedTokens": 8460000,
+      "workflow": "Light without a pre-existing full specification baseline"
+    },
+    "lean": {
+      "profile": "Lean",
+      "baselineCondition": "confirmed change delta specification",
+      "runId": "paln-r3",
+      "status": "completed",
+      "blindScore": 91.5,
+      "implementationTokens": 2860000,
+      "workflow": "Confirmed delta-specification followed by a fresh implementation session"
+    }
+  }
+}
